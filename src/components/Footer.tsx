@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <div className="flex items-center space-x-3 pt-2">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/nataliezimmermann_ger/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 glass-panel flex items-center justify-center text-[#A0A0A0] hover:text-[#3D6B8C] hover:border-[#3D6B8C] transition-all"
