@@ -12,11 +12,11 @@ import { ImagePlaceholder } from '../components/ImagePlaceholder';
 const ABOUT_HERO_IMAGE = '/images/sab8.webp';
 const ABOUT_TEAM_IMAGES = [
   {
-    src: '/images2/6.jpg',
+    src: '/images2/6.webp',
     alt: 'Erhan – Personal Trainer bei body & mind',
   },
   {
-    src: '/images2/7.jpg',
+    src: '/images2/7.webp',
     alt: 'Erhan – Personal Trainer bei body & mind',
   },
 ] as const;

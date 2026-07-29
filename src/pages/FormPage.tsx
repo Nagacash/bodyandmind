@@ -8,7 +8,7 @@ import { GlassPanel } from '../components/ui/GlassPanel';
 import { RevealOnScroll } from '../components/ui/RevealOnScroll';
 import { ImagePlaceholder } from '../components/ImagePlaceholder';
 
-const FORM_MIDDLE_IMAGE = '/images2/10.jpg';
+const FORM_MIDDLE_IMAGE = '/images2/10.webp';
 
 interface FormPageProps {
   onOpenBooking: (pillar?: PillarType, optionName?: string) => void;

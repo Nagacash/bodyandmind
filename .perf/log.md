@@ -106,3 +106,41 @@
 **All pages < 50 ms:** yes (medians ~0.6–1.1 ms on localhost, production Express server)
 
 **CSV:** `.perf/results-post-security.csv`
+
+## Run 4 — image flash + mobile weight — 2026-07-29
+
+**Problem:** On deployed mobile, gallery images showed a placeholder box for a flash before load. Root cause: raw JPGs were **3–15 MB** each (e.g. `10.jpg` = 15 MB).
+
+**Changes:**
+
+1. Converted used gallery images to WebP @ max 1600px (e.g. 15 MB → ~110 KB)
+2. Removed shimmer/icon placeholder flash — quiet `#151515` skeleton only
+3. Soft opacity fade-in; handle cached `img.complete`
+4. `loading="lazy"` below-fold; `priority`/`fetchPriority=high` on PageHero
+5. Moved original JPGs out of `public/` so deploys stay light
+
+| Page | Median (ms) | Pass (<50)? |
+|------|-------------|-------------|
+| / | 1.13 | yes |
+| /flow | 0.65 | yes |
+| /form | 0.58 | yes |
+| /recovery | 0.55 | yes |
+| /mitgliedschaften | 0.52 | yes |
+| /pricing | 0.52 | yes |
+| /ueber-uns | 0.54 | yes |
+| /about | 0.55 | yes |
+| /kontakt | 0.53 | yes |
+| /contact | 0.57 | yes |
+| /impressum | 0.51 | yes |
+| /datenschutz | 0.52 | yes |
+
+**Image transfer (localhost):** `10.webp` ~112 KB / 31 ms · `6.webp` ~53 KB / 17 ms
+
+**Result:** 12/12 passed — HTML still &lt; 50 ms; mobile image weight fixed
+
+**CSV:** `.perf/results-image-opt.csv`
+
+## Final — 2026-07-29 (image opt)
+
+**All pages < 50 ms:** yes  
+**Redeploy required** for production to pick up WebPs + flash fix.

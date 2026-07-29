@@ -10,15 +10,15 @@ import { ImagePlaceholder } from '../components/ImagePlaceholder';
 
 const RECOVERY_GALLERY = [
   {
-    src: '/images2/3.jpg',
+    src: '/images2/3.webp',
     alt: 'Recovery Lounge – Behandlungsliege mit frischen Handtüchern',
   },
   {
-    src: '/images2/4.jpg',
+    src: '/images2/4.webp',
     alt: 'Recovery Ambiente – Zell-Training und Entspannung',
   },
   {
-    src: '/images2/5.jpg',
+    src: '/images2/5.webp',
     alt: 'ASISAM Massagesessel – Premium Recovery im Studio',
   },
 ] as const;

@@ -10,11 +10,11 @@ import { ImagePlaceholder } from '../components/ImagePlaceholder';
 
 const FLOW_GALLERY = [
   {
-    src: '/images2/9.jpg',
+    src: '/images2/9.webp',
     alt: 'FLOW Training – 1:1 Coaching mit Kettlebells im Studio',
   },
   {
-    src: '/images2/8.jpg',
+    src: '/images2/8.webp',
     alt: 'FLOW Training – Persönliche Begleitung und Bewegungsqualität',
   },
 ] as const;

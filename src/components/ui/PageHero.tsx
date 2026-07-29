@@ -32,6 +32,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
       label={imageLabel}
       aspectRatio="auto"
       showBadge={!!imageLabel}
+      priority
       className="aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
     />
 

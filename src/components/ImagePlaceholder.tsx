@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Camera, Image as ImageIcon, X, Expand } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Camera, X, Expand } from 'lucide-react';
 
 interface ImagePlaceholderProps {
   src: string;
@@ -12,6 +12,8 @@ interface ImagePlaceholderProps {
   expandable?: boolean;
   /** How the image fills the frame. Use contain for fully visible portraits. */
   objectFit?: 'cover' | 'contain';
+  /** Eager load for above-the-fold heroes */
+  priority?: boolean;
 }
 
 export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
@@ -23,7 +25,9 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
   showBadge = true,
   expandable = true,
   objectFit = 'cover',
+  priority = false,
 }) => {
+  const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -36,6 +40,16 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
     '3/4': 'aspect-[3/4]',
     'auto': '',
   }[aspectRatio];
+
+  // Handle cached images that fire onLoad before React attaches the handler
+  useEffect(() => {
+    setLoaded(false);
+    setError(false);
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth > 0) {
+      setLoaded(true);
+    }
+  }, [src]);
 
   useEffect(() => {
     if (!lightboxOpen) return;
@@ -78,26 +92,38 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
       >
         {!error && (
           <img
+            ref={imgRef}
             src={src}
             alt={alt}
             referrerPolicy="no-referrer"
+            loading={priority ? 'eager' : 'lazy'}
+            decoding={priority ? 'sync' : 'async'}
+            fetchPriority={priority ? 'high' : 'auto'}
             onLoad={() => setLoaded(true)}
             onError={() => setError(true)}
-          className={`w-full h-full ${objectFit === 'contain' ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-[1.02] ${
-            loaded ? 'opacity-90 group-hover:opacity-100' : 'opacity-0'
-          }`}
-          style={{ willChange: 'transform' }}
-        />
+            className={`w-full h-full ${
+              objectFit === 'contain' ? 'object-contain' : 'object-cover'
+            } transition-opacity duration-300 ease-out ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
         )}
 
-        {(!loaded || error) && (
-          <div className="absolute inset-0 bg-[#1A1A1A] shimmer-loader flex flex-col items-center justify-center p-4 text-center space-y-2">
-            <ImageIcon className="w-8 h-8 text-[#3D6B8C]/60" />
-            <span className="text-xs text-muted font-mono">{alt}</span>
+        {/* Quiet skeleton only — no icon/text flash under the image */}
+        {!loaded && !error && (
+          <div
+            className="absolute inset-0 bg-[#151515] pointer-events-none"
+            aria-hidden="true"
+          />
+        )}
+
+        {error && (
+          <div className="absolute inset-0 bg-[#151515] flex items-center justify-center">
+            <span className="text-xs text-muted">{alt}</span>
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F]/80 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F]/60 via-transparent to-transparent pointer-events-none" />
 
         {expandable && loaded && !error && (
           <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
