@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { NAV_ITEMS } from '../data/studioData';
 import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Logo } from './Logo';
 
 interface HeaderProps {
   onOpenBooking: () => void;
@@ -45,15 +46,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
           <div className="flex items-center justify-between">
             <Link
               to="/"
-              className="text-left group focus:outline-none"
+              className="inline-block group focus:outline-none shrink-0"
               id="header-logo-button"
             >
-              <div className="font-display text-xl sm:text-2xl font-semibold tracking-tight text-white group-hover:text-[#8E7B62] transition-colors uppercase">
-                body & mind
-              </div>
-              <div className="text-[10px] sm:text-[11px] tracking-[0.3em] text-[#8E7B62] uppercase font-body font-medium">
-                by Natalie Zimmermann
-              </div>
+              <Logo className="h-8 sm:h-10 opacity-95 group-hover:opacity-100 transition-opacity" />
             </Link>
 
             <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
@@ -121,13 +117,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
         >
           <div>
             <div className="flex items-center justify-between pb-6 border-b border-white/10">
-              <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-left">
-                <div className="font-display text-xl font-semibold text-white uppercase">
-                  body & mind
-                </div>
-                <div className="text-[10px] tracking-[0.3em] text-[#8E7B62] uppercase">
-                  by Natalie Zimmermann
-                </div>
+              <Link to="/" onClick={() => setMobileMenuOpen(false)} className="inline-block">
+                <Logo className="h-8" />
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}

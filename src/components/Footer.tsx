@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { STUDIO_INFO, NAV_ITEMS } from '../data/studioData';
 import { MapPin, Mail, Instagram, MessageCircle, Info } from 'lucide-react';
+import { Logo } from './Logo';
 
 interface FooterProps {
   onOpenCookieSettings: () => void;
@@ -17,17 +18,17 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/10">
           <div className="lg:col-span-5 space-y-5">
-            <div>
-              <Link to="/" className="font-display text-2xl font-semibold text-white tracking-[0.02em] uppercase hover:text-[#8E7B62] transition-colors leading-none">
-                body & mind
+            <div className="space-y-3">
+              <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
+                <Logo className="h-10 sm:h-11" />
               </Link>
-              <div className="text-[10px] tracking-[0.35em] text-[#8E7B62] uppercase font-body font-medium mt-1">
-                by Natalie Zimmermann
-              </div>
+              <p className="text-[10px] tracking-[0.25em] text-[#8E7B62] uppercase font-body font-medium">
+                Premium Personal Training Hamburg
+              </p>
             </div>
 
             <p className="text-sm text-muted max-w-sm leading-relaxed font-body">
-              Premium Personal Training Hamburg – Ein privates Studio für Bewegung, Regeneration und innere Balance an der Rothenbaumchaussee.
+              Ein privates Studio für Bewegung, Regeneration und innere Balance an der Rothenbaumchaussee.
             </p>
 
             <div className="space-y-2 text-xs text-muted">

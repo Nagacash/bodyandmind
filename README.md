@@ -1,20 +1,58 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# body & mind by Natalie Zimmermann
 
-# Run and deploy your AI Studio app
+Premium Personal Training, Recovery & Stressregulation — Hamburg Rothenbaumchaussee.
 
-This contains everything you need to run your app locally.
+Built by **Naga Codex**.
 
-View your app in AI Studio: https://ai.studio/apps/6e666aec-4518-4c6f-b4a9-8e3d7d3a3be6
+## Tech Stack
+
+- React 19 + TypeScript
+- Vite 6
+- Tailwind CSS v4
+- React Router v7
+- Motion (animations)
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js 18+ or Bun
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+
+```bash
+bun install
+# or: npm install
+```
+
+2. Start the dev server:
+
+```bash
+bun run dev
+# or: npm run dev
+```
+
+3. Open [http://localhost:3000](http://localhost:3000)
+
+## Build for Production
+
+```bash
+bun run build
+bun run preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/     # Header, Footer, UI primitives, modals
+├── pages/          # Home, FLOW, FORM, Recovery, Pricing, About, Contact, Legal
+├── data/           # Content, pricing, navigation
+└── index.css       # Design tokens, fonts, utilities
+
+public/
+├── fonts/          # Self-hosted Playfair Display & Montserrat (GDPR)
+└── images/         # Studio & brand photography
+```
+
+## License
+
+Private client project. All rights reserved.
