@@ -25,12 +25,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
         {/* Intro Section */}
         <RevealOnScroll>
           <section className="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
-            <SectionLabel>Privates Studio Coaching</SectionLabel>
+            <SectionLabel>Premium Privattraining Hamburg</SectionLabel>
             <h2 className="font-display text-2xl sm:text-4xl text-white font-normal uppercase leading-tight max-w-[65ch]">
-              Ein privater Raum für Menschen, die mehr wollen – mehr Stärke, mehr Energie, mehr Balance.
+              Boxen, Kickboxen, Kraft & Recovery – privat statt Massenfitness.
             </h2>
             <p className="text-base text-muted font-body leading-relaxed max-w-[65ch]">
-              Kein Massenstudio. Keine Anonymität. Nur du, dein Ziel und ein Team, das dich wirklich kennt.
+              Kein Massenstudio. Keine Anonymität. Premium Privattraining für Boxen, Kickboxen und Erholung – nur du, dein Ziel und ein Team, das dich wirklich kennt.
             </p>
           </section>
         </RevealOnScroll>

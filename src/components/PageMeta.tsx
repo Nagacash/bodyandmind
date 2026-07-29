@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { absoluteUrl, getRouteSeo, SITE_URL, type PageSeo, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT, DEFAULT_OG_IMAGE_WIDTH, DEFAULT_OG_IMAGE_HEIGHT } from '../lib/seo';
+import { absoluteUrl, getRouteSeo, SITE_URL, type PageSeo, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT, DEFAULT_OG_IMAGE_WIDTH, DEFAULT_OG_IMAGE_HEIGHT, SEO_KEYWORDS } from '../lib/seo';
 import { STUDIO_INFO } from '../data/studioData';
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
@@ -27,17 +27,21 @@ interface PageMetaProps extends Partial<PageSeo> {
   path?: string;
 }
 
-export function PageMeta({ title, description, answerLead, path }: PageMetaProps) {
+export function PageMeta({ title, description, answerLead, keywords, path }: PageMetaProps) {
   const { pathname } = useLocation();
   const route = path ?? pathname;
   const seo = getRouteSeo(route);
   const resolvedTitle = title ?? seo.title;
   const resolvedDescription = description ?? seo.description;
+  const resolvedKeywords = keywords ?? seo.keywords;
   const canonical = absoluteUrl(route.split('?')[0] || '/');
 
   useEffect(() => {
     document.title = resolvedTitle;
     upsertMeta('name', 'description', resolvedDescription);
+    if (resolvedKeywords) {
+      upsertMeta('name', 'keywords', resolvedKeywords);
+    }
     upsertMeta('property', 'og:title', resolvedTitle);
     upsertMeta('property', 'og:description', resolvedDescription);
     upsertMeta('property', 'og:type', 'website');
@@ -59,12 +63,13 @@ export function PageMeta({ title, description, answerLead, path }: PageMetaProps
       upsertMeta('name', 'abstract', (answerLead ?? seo.answerLead)!);
     }
     upsertLink('canonical', canonical);
-  }, [resolvedTitle, resolvedDescription, canonical, answerLead, seo.answerLead]);
+  }, [resolvedTitle, resolvedDescription, resolvedKeywords, canonical, answerLead, seo.answerLead]);
 
   return null;
 }
 
 export function SiteStructuredData() {
+  const homeSeo = getRouteSeo('/');
   const data = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -73,8 +78,9 @@ export function SiteStructuredData() {
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
         name: STUDIO_INFO.brandName,
-        description: STUDIO_INFO.tagline,
+        description: homeSeo.description,
         inLanguage: 'de-DE',
+        keywords: SEO_KEYWORDS.join(', '),
       },
       {
         '@type': 'HealthClub',
@@ -82,7 +88,8 @@ export function SiteStructuredData() {
         name: STUDIO_INFO.brandName,
         url: SITE_URL,
         email: STUDIO_INFO.email,
-        description: STUDIO_INFO.tagline,
+        description: homeSeo.answerLead ?? homeSeo.description,
+        knowsAbout: [...SEO_KEYWORDS],
         address: {
           '@type': 'PostalAddress',
           streetAddress: STUDIO_INFO.locationName,

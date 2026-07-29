@@ -6,6 +6,18 @@ import { SectionLabel } from '../components/ui/SectionLabel';
 import { CtaBanner } from '../components/ui/CtaBanner';
 import { GlassPanel } from '../components/ui/GlassPanel';
 import { RevealOnScroll } from '../components/ui/RevealOnScroll';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
+
+const FLOW_GALLERY = [
+  {
+    src: '/images2/9.jpg',
+    alt: 'FLOW Training – 1:1 Coaching mit Kettlebells im Studio',
+  },
+  {
+    src: '/images2/8.jpg',
+    alt: 'FLOW Training – Persönliche Begleitung und Bewegungsqualität',
+  },
+] as const;
 
 interface FlowPageProps {
   onOpenBooking: (pillar?: PillarType, optionName?: string) => void;
@@ -15,12 +27,12 @@ export const FlowPage: React.FC<FlowPageProps> = ({ onOpenBooking }) => {
   return (
     <div className="page-section-gap page-shell max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
       <PageHero
-        badge="SÄULE 01"
-        title="SÄULE 01 FLOW – Bewegung als mentales Ventil."
-        description="Boxen und Kickboxen im privaten 1:1 Setting als kraftvolles Werkzeug für Fokus, Energiefreisetzung und nachhaltigen Stressabbau – ohne Leistungsdruck oder Ringkämpfe."
+        badge="SÄULE 01 · BOXEN & KICKBOXEN"
+        title="FLOW – Box Privattraining & Kickboxen in Hamburg."
+        description="Privates 1:1 Boxen und Kickboxen als mentales Ventil: Stressabbau, Fokus und Energie im Premium-Setting – ohne Leistungsdruck oder Ringkämpfe."
         imageSrc="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1600&auto=format&fit=crop"
-        imageAlt="FLOW - Boxen & Pratzentraining Hamburg"
-        imageLabel="FLOW HERO BILD: Boxen & Pratzentraining"
+        imageAlt="Boxen und Kickboxen Privattraining Hamburg – FLOW"
+        imageLabel="FLOW: Boxen & Kickboxen"
         ctaLabel="FLOW Erstgespräch vereinbaren"
         onCtaClick={() => onOpenBooking('FLOW', 'FLOW 1:1 Session')}
       />
@@ -48,6 +60,29 @@ export const FlowPage: React.FC<FlowPageProps> = ({ onOpenBooking }) => {
                 <h3 className="font-display text-xl text-white font-normal uppercase">{item.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{item.desc}</p>
               </div>
+            ))}
+          </div>
+        </section>
+      </RevealOnScroll>
+
+      <RevealOnScroll>
+        <section className="space-y-6">
+          <div className="max-w-2xl space-y-2">
+            <SectionLabel>Im Studio</SectionLabel>
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Privates 1:1 Training
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {FLOW_GALLERY.map((image) => (
+              <ImagePlaceholder
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                aspectRatio="4/3"
+                showBadge={false}
+              />
             ))}
           </div>
         </section>

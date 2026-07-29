@@ -6,6 +6,9 @@ import { SectionLabel } from '../components/ui/SectionLabel';
 import { CtaBanner } from '../components/ui/CtaBanner';
 import { GlassPanel } from '../components/ui/GlassPanel';
 import { RevealOnScroll } from '../components/ui/RevealOnScroll';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
+
+const FORM_MIDDLE_IMAGE = '/images2/10.jpg';
 
 interface FormPageProps {
   onOpenBooking: (pillar?: PillarType, optionName?: string) => void;
@@ -54,25 +57,36 @@ export const FormPage: React.FC<FormPageProps> = ({ onOpenBooking }) => {
       </RevealOnScroll>
 
       <RevealOnScroll>
-        <GlassPanel className="p-8 sm:p-12 space-y-8">
-          <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
-            Deine Vorteile mit FORM
-          </h2>
+        <GlassPanel className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-5">
+            <ImagePlaceholder
+              src={FORM_MIDDLE_IMAGE}
+              alt="FORM Training – Krafttraining mit Kettlebells im Studio"
+              aspectRatio="3/4"
+              showBadge={false}
+            />
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              { title: 'Kraftaufbau & Toning', desc: 'Gezielte Definition der Muskulatur ohne Überlastung.' },
-              { title: 'Aufrechte Haltung', desc: 'Effektiver Ausgleich von Bürohaltung und Schulterverspannungen.' },
-              { title: 'Gelenkgesundheit', desc: 'Schonendes Training zur Stabilisierung von Knie, Hüfte und Wirbelsäule.' },
-              { title: 'Funktionelle Bewegung', desc: 'Bewegungsabläufe, die dir im Alltag direkt zugutekommen.' },
-              { title: '1:1 Betreuung', desc: 'Kontinuierliche Korrektur der Ausführung für maximale Sicherheit.' },
-              { title: 'Individuelle Steuerung', desc: 'Trainingssteuerung basierend auf deiner tagesaktuellen Verfassung.' },
-            ].map((benefit, i) => (
-              <div key={i} className="benefit-strip py-3">
-                <h4 className="text-xs font-bold text-white mb-0.5">{benefit.title}</h4>
-                <p className="text-[11px] text-muted">{benefit.desc}</p>
-              </div>
-            ))}
+          <div className="lg:col-span-7 space-y-8">
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Deine Vorteile mit FORM
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { title: 'Kraftaufbau & Toning', desc: 'Gezielte Definition der Muskulatur ohne Überlastung.' },
+                { title: 'Aufrechte Haltung', desc: 'Effektiver Ausgleich von Bürohaltung und Schulterverspannungen.' },
+                { title: 'Gelenkgesundheit', desc: 'Schonendes Training zur Stabilisierung von Knie, Hüfte und Wirbelsäule.' },
+                { title: 'Funktionelle Bewegung', desc: 'Bewegungsabläufe, die dir im Alltag direkt zugutekommen.' },
+                { title: '1:1 Betreuung', desc: 'Kontinuierliche Korrektur der Ausführung für maximale Sicherheit.' },
+                { title: 'Individuelle Steuerung', desc: 'Trainingssteuerung basierend auf deiner tagesaktuellen Verfassung.' },
+              ].map((benefit, i) => (
+                <div key={i} className="benefit-strip py-3">
+                  <h4 className="text-xs font-bold text-white mb-0.5">{benefit.title}</h4>
+                  <p className="text-[11px] text-muted">{benefit.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </GlassPanel>
       </RevealOnScroll>

@@ -10,7 +10,16 @@ import { RevealOnScroll } from '../components/ui/RevealOnScroll';
 import { ImagePlaceholder } from '../components/ImagePlaceholder';
 
 const ABOUT_HERO_IMAGE = '/images/sab8.webp';
-const ABOUT_FOUNDER_IMAGE = '/images/sab8.webp';
+const ABOUT_TEAM_IMAGES = [
+  {
+    src: '/images2/6.jpg',
+    alt: 'Erhan – Personal Trainer bei body & mind',
+  },
+  {
+    src: '/images2/7.jpg',
+    alt: 'Erhan – Personal Trainer bei body & mind',
+  },
+] as const;
 
 interface AboutPageProps {
   onOpenBooking: (pillar?: PillarType, optionName?: string) => void;
@@ -29,13 +38,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
 
       <RevealOnScroll>
         <GlassPanel className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-5">
-            <ImagePlaceholder
-              src={ABOUT_FOUNDER_IMAGE}
-              alt="Natalie Zimmermann Founder Portrait"
-              aspectRatio="4/3"
-              showBadge={false}
-            />
+          <div className="lg:col-span-5 space-y-2">
+            <div className="grid grid-cols-2 gap-3">
+              {ABOUT_TEAM_IMAGES.map((image) => (
+                <ImagePlaceholder
+                  key={image.src}
+                  src={image.src}
+                  alt={image.alt}
+                  aspectRatio="3/4"
+                  objectFit="contain"
+                  showBadge={false}
+                />
+              ))}
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#3D6B8C] text-center">
+              Erhan · Personal Trainer
+            </p>
           </div>
 
           <div className="lg:col-span-7 space-y-4">

@@ -6,6 +6,22 @@ import { PageHero } from '../components/ui/PageHero';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { GlassPanel } from '../components/ui/GlassPanel';
 import { RevealOnScroll } from '../components/ui/RevealOnScroll';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
+
+const RECOVERY_GALLERY = [
+  {
+    src: '/images2/3.jpg',
+    alt: 'Recovery Lounge – Behandlungsliege mit frischen Handtüchern',
+  },
+  {
+    src: '/images2/4.jpg',
+    alt: 'Recovery Ambiente – Zell-Training und Entspannung',
+  },
+  {
+    src: '/images2/5.jpg',
+    alt: 'ASISAM Massagesessel – Premium Recovery im Studio',
+  },
+] as const;
 
 interface RecoveryPageProps {
   onOpenBooking: (pillar?: PillarType, optionName?: string) => void;
@@ -15,12 +31,12 @@ export const RecoveryPage: React.FC<RecoveryPageProps> = ({ onOpenBooking }) => 
   return (
     <div className="page-section-gap page-shell max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
       <PageHero
-        badge="SÄULE 03"
-        title="SÄULE 03 RECOVERY – Regeneration für Körper und Nervensystem."
-        description="Wissenschaftlich fundierte Recovery-Anwendungen zur Förderung der tiefen Gewebsregeneration, Stressregulation und Erholung deines vegetativen Nervensystems."
+        badge="SÄULE 03 · RECOVERY & ERHOLUNG"
+        title="RECOVERY – Premium Erholung für Körper und Nervensystem."
+        description="Premium Recovery und Erholung in Hamburg: wissenschaftlich fundierte Anwendungen zur Regeneration, Stressregulation und tiefen Erholung – ergänzend zu deinem Privattraining."
         imageSrc="/images/recovery3.webp"
-        imageAlt="Säule 03 RECOVERY - Lounge Suite Hamburg"
-        imageLabel="RECOVERY HERO BILD: Lounge Suite Rothenbaum"
+        imageAlt="Recovery und Erholung Hamburg – Premium Regeneration"
+        imageLabel="RECOVERY: Erholung & Regeneration"
         ctaLabel="Recovery Erstgespräch vereinbaren"
         onCtaClick={() => onOpenBooking('RECOVERY', 'Recovery Session')}
       />
@@ -70,6 +86,29 @@ export const RecoveryPage: React.FC<RecoveryPageProps> = ({ onOpenBooking }) => 
                   </button>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+      </RevealOnScroll>
+
+      <RevealOnScroll>
+        <section className="space-y-6">
+          <div className="max-w-2xl space-y-2">
+            <SectionLabel>Im Studio</SectionLabel>
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Raum für tiefe Erholung
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {RECOVERY_GALLERY.map((image) => (
+              <ImagePlaceholder
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                aspectRatio="3/4"
+                showBadge={false}
+              />
             ))}
           </div>
         </section>

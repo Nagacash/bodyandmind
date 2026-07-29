@@ -22,7 +22,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => {
     <div className="relative min-h-[100dvh] overflow-hidden bg-[#151515]">
       <img
         src={HERO_IMAGE}
-        alt="Premium Personal Training Hamburg"
+        alt="Premium Privattraining Hamburg – Boxen, Kickboxen und Recovery"
         referrerPolicy="no-referrer"
         className="w-full h-full min-h-[100dvh] object-cover object-center"
       />
@@ -42,15 +42,15 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => {
 
           <StaggerItem>
             <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-normal text-white tracking-tight leading-[1.05] uppercase text-balance">
-              PREMIUM PERSONAL
+              PREMIUM PRIVATTRAINING
               <br />
-              TRAINING HAMBURG
+              HAMBURG
             </h1>
           </StaggerItem>
 
           <StaggerItem>
             <h2 className="font-display text-xl sm:text-2xl text-[#3D6B8C] font-normal italic">
-              Trainiere deinen Körper. Stärke deinen Geist.
+              Boxen · Kickboxen · Recovery · Erholung
             </h2>
           </StaggerItem>
 

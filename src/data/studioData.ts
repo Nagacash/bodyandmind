@@ -11,7 +11,7 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const STUDIO_INFO = {
   brandName: 'body & mind by Natalie Zimmermann',
-  tagline: 'Premium Personal Training, Recovery & Stressregulation',
+  tagline: 'Premium Privattraining: Boxen, Kickboxen, Kraft & Recovery in Hamburg',
   locationName: 'Rothenbaumchaussee 156',
   cityPostal: '20149 Hamburg',
   district: 'Rotherbaum',

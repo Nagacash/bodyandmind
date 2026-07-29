@@ -1,4 +1,4 @@
-import { getRouteSeo, absoluteUrl, SITE_URL, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT, DEFAULT_OG_IMAGE_WIDTH, DEFAULT_OG_IMAGE_HEIGHT } from '../src/lib/seo.ts';
+import { getRouteSeo, absoluteUrl, SITE_URL, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT, DEFAULT_OG_IMAGE_WIDTH, DEFAULT_OG_IMAGE_HEIGHT, SEO_KEYWORDS } from '../src/lib/seo.ts';
 import { STUDIO_INFO } from '../src/data/studioData.ts';
 
 function escapeAttr(value: string): string {
@@ -8,6 +8,8 @@ function escapeAttr(value: string): string {
     .replace(/</g, '&lt;');
 }
 
+const homeSeo = getRouteSeo('/');
+
 const SITE_JSON_LD = JSON.stringify({
   '@context': 'https://schema.org',
   '@graph': [
@@ -16,8 +18,9 @@ const SITE_JSON_LD = JSON.stringify({
       '@id': `${SITE_URL}/#website`,
       url: SITE_URL,
       name: STUDIO_INFO.brandName,
-      description: STUDIO_INFO.tagline,
+      description: homeSeo.description,
       inLanguage: 'de-DE',
+      keywords: SEO_KEYWORDS.join(', '),
     },
     {
       '@type': 'HealthClub',
@@ -25,6 +28,8 @@ const SITE_JSON_LD = JSON.stringify({
       name: STUDIO_INFO.brandName,
       url: SITE_URL,
       email: STUDIO_INFO.email,
+      description: homeSeo.answerLead ?? homeSeo.description,
+      knowsAbout: [...SEO_KEYWORDS],
       address: {
         '@type': 'PostalAddress',
         streetAddress: STUDIO_INFO.locationName,
@@ -42,6 +47,7 @@ export function injectRouteHtmlMeta(html: string, pathname: string): string {
   const canonical = absoluteUrl(route);
   const title = escapeAttr(seo.title);
   const description = escapeAttr(seo.description);
+  const keywords = seo.keywords ? escapeAttr(seo.keywords) : '';
   const ogImage = escapeAttr(DEFAULT_OG_IMAGE);
   const ogImageAlt = escapeAttr(DEFAULT_OG_IMAGE_ALT);
 
@@ -50,7 +56,23 @@ export function injectRouteHtmlMeta(html: string, pathname: string): string {
     .replace(
       /<meta name="description" content="[^"]*"\s*\/?>/,
       `<meta name="description" content="${description}" />`
-    )
+    );
+
+  if (keywords) {
+    if (/<meta name="keywords" content="[^"]*"\s*\/?>/.test(out)) {
+      out = out.replace(
+        /<meta name="keywords" content="[^"]*"\s*\/?>/,
+        `<meta name="keywords" content="${keywords}" />`
+      );
+    } else {
+      out = out.replace(
+        /<meta name="description" content="[^"]*"\s*\/?>/,
+        (match) => `${match}\n    <meta name="keywords" content="${keywords}" />`
+      );
+    }
+  }
+
+  out = out
     .replace(
       /<link rel="canonical" href="[^"]*"\s*\/?>/,
       `<link rel="canonical" href="${canonical}" />`
