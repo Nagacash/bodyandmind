@@ -24,20 +24,21 @@ export const PageHero: React.FC<PageHeroProps> = ({
   ctaLabel,
   onCtaClick,
 }) => (
-  <section className="space-y-10 max-w-6xl">
+  <section className="space-y-6 sm:space-y-10 max-w-6xl">
     {/* Image first — clean, no text on image */}
     <ImagePlaceholder
       src={imageSrc}
       alt={imageAlt}
       label={imageLabel}
-      aspectRatio="21/9"
+      aspectRatio="auto"
       showBadge={!!imageLabel}
+      className="aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
     />
 
-    <div className="max-w-3xl space-y-6 text-left">
+    <div className="max-w-3xl space-y-4 sm:space-y-6 text-left">
       <SectionLabel>{badge}</SectionLabel>
 
-      <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-white uppercase tracking-tight leading-[1.1]">
+      <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-white uppercase tracking-tight leading-[1.15] text-balance">
         {title}
       </h1>
 

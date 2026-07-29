@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { PillarType } from './types';
 import { Header } from './components/Header';
@@ -6,15 +6,32 @@ import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ErstgespraechModal } from './components/ErstgespraechModal';
 import { CookieBanner } from './components/CookieBanner';
+import { PageMeta, SiteStructuredData } from './components/PageMeta';
 
-import { HomePage } from './pages/HomePage';
-import { FlowPage } from './pages/FlowPage';
-import { FormPage } from './pages/FormPage';
-import { RecoveryPage } from './pages/RecoveryPage';
-import { PricingPage } from './pages/PricingPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-import { LegalPage } from './pages/LegalPage';
+const HomePage = lazy(() =>
+  import('./pages/HomePage').then((m) => ({ default: m.HomePage }))
+);
+const FlowPage = lazy(() =>
+  import('./pages/FlowPage').then((m) => ({ default: m.FlowPage }))
+);
+const FormPage = lazy(() =>
+  import('./pages/FormPage').then((m) => ({ default: m.FormPage }))
+);
+const RecoveryPage = lazy(() =>
+  import('./pages/RecoveryPage').then((m) => ({ default: m.RecoveryPage }))
+);
+const PricingPage = lazy(() =>
+  import('./pages/PricingPage').then((m) => ({ default: m.PricingPage }))
+);
+const AboutPage = lazy(() =>
+  import('./pages/AboutPage').then((m) => ({ default: m.AboutPage }))
+);
+const ContactPage = lazy(() =>
+  import('./pages/ContactPage').then((m) => ({ default: m.ContactPage }))
+);
+const LegalPage = lazy(() =>
+  import('./pages/LegalPage').then((m) => ({ default: m.LegalPage }))
+);
 
 export default function App() {
   // Booking Modal State
@@ -50,14 +67,17 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen bg-[#0F0F0F] text-[#F5F5F5] flex flex-col font-sans selection:bg-[#8E7B62] selection:text-[#0F0F0F] relative">
+      <PageMeta />
+      <SiteStructuredData />
+      <div className="min-h-screen bg-[#0F0F0F] text-[#F5F5F5] flex flex-col font-sans selection:bg-accent selection:text-white relative">
         <div className="grain-overlay" aria-hidden="true" />
         {/* Navigation Header */}
         <Header onOpenBooking={() => handleOpenBooking('GENERAL')} />
 
         {/* Main Page Routes */}
         <main className="flex-1">
-          <Routes>
+          <Suspense fallback={null}>
+            <Routes>
             <Route
               path="/"
               element={<HomePage onOpenBooking={handleOpenBooking} />}
@@ -89,7 +109,8 @@ export default function App() {
             <Route path="/impressum" element={<LegalPage type="impressum" />} />
             <Route path="/datenschutz" element={<LegalPage type="datenschutz" />} />
             <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+            </Routes>
+          </Suspense>
         </main>
 
         {/* Footer */}

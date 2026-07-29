@@ -13,7 +13,7 @@ interface FlowPageProps {
 
 export const FlowPage: React.FC<FlowPageProps> = ({ onOpenBooking }) => {
   return (
-    <div className="space-y-28 pt-28 pb-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
+    <div className="page-section-gap page-shell max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
       <PageHero
         badge="SÄULE 01"
         title="SÄULE 01 FLOW – Bewegung als mentales Ventil."
@@ -40,8 +40,8 @@ export const FlowPage: React.FC<FlowPageProps> = ({ onOpenBooking }) => {
               { num: '02', title: 'Energie freisetzen', desc: 'Dynamische Bewegungsabläufe kurbeln das Herz-Kreislauf-System an und bringen frische Vitalität in deinen Körper.', icon: Zap },
               { num: '03', title: 'Fokus & Präsenz', desc: 'Kombinationen erfordern 100% Aufmerksamkeit im Hier und Jetzt. Gedanken an Arbeit verschwinden augenblicklich.', icon: Target },
             ].map((item) => (
-              <div key={item.num} className="p-8 glass-panel space-y-4 hover:border-[#8E7B62]/30 transition-all">
-                <div className="flex items-center justify-between text-[#8E7B62]">
+              <div key={item.num} className="p-8 glass-panel space-y-4 hover:border-[#3D6B8C]/30 transition-all">
+                <div className="flex items-center justify-between text-[#3D6B8C]">
                   <item.icon className="w-6 h-6" />
                   <span className="font-mono text-xs font-bold">{item.num}</span>
                 </div>
@@ -102,7 +102,7 @@ export const FlowPage: React.FC<FlowPageProps> = ({ onOpenBooking }) => {
                 items: ['Ganzheitliche Aktivierung der großen Muskelgruppen', 'Förderung der Flexibilität & Hüftmobilität', 'Abwechslungsreicher Bewegungsfluss'],
               },
             ].map((method) => (
-              <div key={method.title} className="p-8 glass-panel space-y-4 hover:border-[#8E7B62]/30 transition-all">
+              <div key={method.title} className="p-8 glass-panel space-y-4 hover:border-[#3D6B8C]/30 transition-all">
                 <h3 className="font-display text-2xl text-white font-normal uppercase">{method.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{method.desc}</p>
                 <ul className="text-xs text-muted space-y-1.5 pt-2">

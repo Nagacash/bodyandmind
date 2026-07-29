@@ -1,0 +1,115 @@
+{
+  "generated_at": "2026-07-29T10:55:40.661287+00:00",
+  "base_url": "http://127.0.0.1:4173",
+  "robots": {
+    "url": "http://127.0.0.1:4173/robots.txt",
+    "status": 200,
+    "body": "User-agent: *\nAllow: /\n\nSitemap: https://bodyandmindbynatalie.de/sitemap.xml\n"
+  },
+  "sitemap": {
+    "url": "http://127.0.0.1:4173/sitemap.xml",
+    "status": 200
+  },
+  "pages": {
+    "http://127.0.0.1:4173/": {
+      "url": "http://127.0.0.1:4173/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Premium Personal Training Hamburg | body & mind by Natalie Zimmermann",
+      "meta_robots": "index, follow",
+      "canonical": "https://bodyandmindbynatalie.de",
+      "h1": [
+        "Premium Personal Training Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 7
+    },
+    "http://127.0.0.1:4173/flow": {
+      "url": "http://127.0.0.1:4173/flow",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "FLOW \u2013 Boxen & Kickboxen Personal Training Hamburg | body & mind",
+      "meta_robots": "index, follow",
+      "canonical": "https://bodyandmindbynatalie.de/flow",
+      "h1": [
+        "FLOW \u2013 Boxen & Kickboxen Personal Training Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 7
+    },
+    "http://127.0.0.1:4173/form": {
+      "url": "http://127.0.0.1:4173/form",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "FORM \u2013 Kraft & Athletik Personal Training Hamburg | body & mind",
+      "meta_robots": "index, follow",
+      "canonical": "https://bodyandmindbynatalie.de/form",
+      "h1": [
+        "FORM \u2013 Kraft & Athletik Personal Training Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 7
+    },
+    "http://127.0.0.1:4173/recovery": {
+      "url": "http://127.0.0.1:4173/recovery",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "RECOVERY \u2013 Regeneration & Stressregulation Hamburg | body & mind",
+      "meta_robots": "index, follow",
+      "canonical": "https://bodyandmindbynatalie.de/recovery",
+      "h1": [
+        "RECOVERY \u2013 Regeneration & Stressregulation Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 7
+    },
+    "http://127.0.0.1:4173/mitgliedschaften": {
+      "url": "http://127.0.0.1:4173/mitgliedschaften",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Mitgliedschaften & Preise Personal Training Hamburg | body & mind",
+      "meta_robots": "index, follow",
+      "canonical": "https://bodyandmindbynatalie.de/mitgliedschaften",
+      "h1": [
+        "Mitgliedschaften & Preise Personal Training Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 7
+    },
+    "http://127.0.0.1:4173/ueber-uns": {
+      "url": "http://127.0.0.1:4173/ueber-uns",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "\u00dcber uns \u2013 Natalie Zimmermann Personal Training Hamburg | body & mind",
+      "meta_robots": "index, follow",
+      "canonical": "https://bodyandmindbynatalie.de/ueber-uns",
+      "h1": [
+        "\u00dcber uns \u2013 Natalie Zimmermann Personal Training Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 7
+    },
+    "http://127.0.0.1:4173/kontakt": {
+      "url": "http://127.0.0.1:4173/kontakt",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Kontakt & Erstgespr\u00e4ch Hamburg | body & mind by Natalie Zimmermann",
+      "meta_robots": "index, follow",
+      "canonical": "https://bodyandmindbynatalie.de/kontakt",
+      "h1": [
+        "Kontakt & Erstgespr\u00e4ch Hamburg"
+      ],
+      "has_json_ld": true,
+      "internal_links": 7
+    }
+  },
+  "issues": [],
+  "summary": {
+    "pages_crawled": 7,
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "note": "crawled 7 pages (max 200)"
+  }
+}

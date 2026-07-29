@@ -8,11 +8,11 @@ interface LegalPageProps {
 
 export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
   return (
-    <div className="pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 font-body space-y-8 animate-in fade-in duration-300">
+    <div className="page-shell max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 font-body space-y-8 animate-in fade-in duration-300">
       <div className="flex items-center gap-3 border-b border-[#222222] pb-6">
-        <FileText className="w-8 h-8 text-[#8E7B62]" />
+        <FileText className="w-8 h-8 text-[#3D6B8C]" />
         <div>
-          <div className="text-xs font-bold uppercase tracking-widest text-[#8E7B62]">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#3D6B8C]">
             Rechtliche Informationen
           </div>
           <h1 className="font-display text-3xl sm:text-4xl text-white uppercase font-normal">
@@ -27,7 +27,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
             <div>
               <h2 className="text-base font-bold text-white uppercase mb-2">Angaben gemäß § 5 TMG</h2>
               <p>
-                <strong className="text-[#8E7B62]">body & mind by Natalie Zimmermann</strong><br />
+                <strong className="text-[#3D6B8C]">body & mind by Natalie Zimmermann</strong><br />
                 Rothenbaumchaussee 156<br />
                 20149 Hamburg<br />
                 Deutschland

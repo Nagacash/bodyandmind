@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-07-29T10:52:13.867137+00:00",
+  "base_url": "http://127.0.0.1:4173",
+  "robots": {
+    "url": "http://127.0.0.1:4173/robots.txt",
+    "status": 0,
+    "body": "<urlopen error [Errno 61] Connection refused>"
+  },
+  "sitemap": {
+    "url": "http://127.0.0.1:4173/sitemap.xml",
+    "status": 0
+  },
+  "pages": {
+    "http://127.0.0.1:4173/": {
+      "url": "http://127.0.0.1:4173/",
+      "status": 0,
+      "content_type": ""
+    }
+  },
+  "issues": [
+    {
+      "severity": "critical",
+      "axis": "crawlability",
+      "issue": "robots.txt missing or error",
+      "url": "http://127.0.0.1:4173/robots.txt"
+    },
+    {
+      "severity": "high",
+      "axis": "crawlability",
+      "issue": "sitemap.xml missing or error",
+      "url": "http://127.0.0.1:4173/sitemap.xml"
+    },
+    {
+      "severity": "critical",
+      "axis": "crawlability",
+      "issue": "HTTP 0",
+      "url": "http://127.0.0.1:4173/"
+    }
+  ],
+  "summary": {
+    "pages_crawled": 1,
+    "critical": 2,
+    "high": 1,
+    "medium": 0,
+    "low": 0,
+    "note": "crawled 1 pages (max 200)"
+  }
+}

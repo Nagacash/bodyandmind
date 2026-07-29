@@ -60,7 +60,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
         {!showDetails ? (
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div className="flex items-start gap-3.5 max-w-3xl">
-              <Shield className="w-5 h-5 text-[#8E7B62] shrink-0 mt-0.5" />
+              <Shield className="w-5 h-5 text-[#3D6B8C] shrink-0 mt-0.5" />
               <div className="space-y-1">
                 <h3 className="text-sm font-semibold text-white">
                   Privatsphäre & Datenschutz (DSGVO)
@@ -80,13 +80,13 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
               </button>
               <button
                 onClick={handleAcceptEssential}
-                className="px-4 py-2 rounded-none border border-[#8E7B62]/40 text-xs font-semibold text-[#8E7B62] hover:bg-[#8E7B62]/10 transition-all"
+                className="px-4 py-2 rounded-none border border-[#3D6B8C]/40 text-xs font-semibold text-[#3D6B8C] hover:bg-[#3D6B8C]/10 transition-all"
               >
                 Nur Essenzielle
               </button>
               <button
                 onClick={handleAcceptAll}
-                className="px-5 py-2 rounded-none bg-[#8E7B62] hover:bg-[#A08C71] text-[#0F0F0F] text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+                className="px-5 py-2 rounded-none bg-[#3D6B8C] hover:bg-[#5289AD] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
               >
                 Alle akzeptieren
               </button>
@@ -96,7 +96,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
           <div className="space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-[#222222]">
               <h3 className="text-base font-display font-normal text-white uppercase flex items-center gap-2">
-                <Settings className="w-4 h-4 text-[#8E7B62]" />
+                <Settings className="w-4 h-4 text-[#3D6B8C]" />
                 <span>Cookie-Einstellungen anpassen</span>
               </h3>
               {!isSettingsOpenOnly && (
@@ -113,7 +113,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
               <div className="p-4 rounded-xl bg-[#151515] border border-[#222222] space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-white">Essentiell</span>
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-[#8E7B62] bg-[#8E7B62]/10 px-2 py-0.5 rounded-none">
+                  <span className="text-[10px] uppercase tracking-wider font-bold text-[#3D6B8C] bg-[#3D6B8C]/10 px-2 py-0.5 rounded-none">
                     Immer Aktiv
                   </span>
                 </div>
@@ -131,7 +131,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
                     onChange={(e) =>
                       setPreferences({ ...preferences, analytics: e.target.checked })
                     }
-                    className="rounded-none border-[#222222] bg-[#151515] text-[#8E7B62] focus:ring-[#8E7B62]"
+                    className="rounded-none border-[#222222] bg-[#151515] text-[#3D6B8C] focus:ring-[#3D6B8C]"
                   />
                 </div>
                 <p className="text-xs text-muted">
@@ -148,7 +148,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
                     onChange={(e) =>
                       setPreferences({ ...preferences, marketing: e.target.checked })
                     }
-                    className="rounded-none border-[#222222] bg-[#151515] text-[#8E7B62] focus:ring-[#8E7B62]"
+                    className="rounded-none border-[#222222] bg-[#151515] text-[#3D6B8C] focus:ring-[#3D6B8C]"
                   />
                 </div>
                 <p className="text-xs text-muted">
@@ -160,7 +160,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
             <div className="flex items-center justify-end space-x-3 pt-2">
               <button
                 onClick={handleSaveCustom}
-                className="bg-[#8E7B62] hover:bg-[#A08C71] text-[#0F0F0F] px-6 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer"
+                className="bg-[#3D6B8C] hover:bg-[#5289AD] text-white px-6 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer"
               >
                 <Check className="w-4 h-4" />
                 <span>Auswahl speichern</span>

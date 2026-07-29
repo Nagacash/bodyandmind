@@ -46,7 +46,7 @@ export const PillarsSection: React.FC = () => (
                     label={`FOTO PLATZHALTER: ${pillar.name}`}
                     aspectRatio="4/3"
                     showBadge={pillar.id === 'form'}
-                    className="transition-all duration-500 group-hover:border-[#8E7B62]/40"
+                    className="transition-all duration-500 group-hover:border-[#3D6B8C]/40"
                   />
                 </div>
 
@@ -54,19 +54,19 @@ export const PillarsSection: React.FC = () => (
                 <div className={`space-y-5 ${imageRight ? 'lg:[direction:ltr]' : ''}`}>
                   <div className="flex items-center gap-4">
                     <span
-                      className="font-display text-5xl sm:text-6xl leading-none text-[#8E7B62]/25 select-none tabular-nums"
+                      className="font-display text-5xl sm:text-6xl leading-none text-[#3D6B8C]/25 select-none tabular-nums"
                       aria-hidden="true"
                     >
                       {pillar.number}
                     </span>
-                    <div className="h-px flex-1 bg-[#222222] group-hover:bg-[#8E7B62]/30 transition-colors" />
+                    <div className="h-px flex-1 bg-[#222222] group-hover:bg-[#3D6B8C]/30 transition-colors" />
                   </div>
 
                   <div className="space-y-3">
                     <h3 className="font-display text-3xl sm:text-4xl text-white font-normal uppercase tracking-tight">
                       {pillar.name}
                     </h3>
-                    <p className="text-sm sm:text-base text-[#8E7B62] font-body italic">
+                    <p className="text-sm sm:text-base text-[#3D6B8C] font-body italic">
                       {pillar.tagline}
                     </p>
                   </div>
@@ -77,7 +77,7 @@ export const PillarsSection: React.FC = () => (
 
                   <Link
                     to={`/${pillar.id}`}
-                    className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.15em] text-[#8E7B62] hover:text-white transition-colors pt-1 group/link"
+                    className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.15em] text-[#3D6B8C] hover:text-white transition-colors pt-1 group/link"
                   >
                     <span>{pillar.linkText}</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />

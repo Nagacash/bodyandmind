@@ -24,12 +24,12 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   showArrow = false,
 }) => {
   const baseClasses =
-    'inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-none text-xs font-bold uppercase tracking-[0.2em] transition-all cursor-pointer group active:scale-[0.98]';
+    'inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 min-h-[44px] rounded-none text-xs sm:text-xs font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-all cursor-pointer group active:scale-[0.98]';
 
   const variantClasses =
     variant === 'solid'
-      ? 'bg-[#8E7B62] hover:bg-[#A08C71] text-[#0F0F0F] shadow-xl hover:shadow-2xl'
-      : 'border border-[#222222] text-gray-300 hover:text-white hover:bg-[#1A1A1A]';
+      ? 'bg-accent hover:bg-accent-hover text-white shadow-xl hover:shadow-2xl'
+      : 'border border-border text-gray-300 hover:text-white hover:bg-surface-elevated';
 
   const classes = `${baseClasses} ${variantClasses} ${className}`;
 

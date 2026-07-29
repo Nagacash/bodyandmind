@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, Check } from 'lucide-react';
 import { PrimaryButton } from './ui/PrimaryButton';
 import { StaggerContainer, StaggerItem } from './ui/RevealOnScroll';
+import { getRouteSeo } from '../lib/seo';
 
 const HERO_IMAGE = '/images/beach2.webp';
 
@@ -12,7 +13,10 @@ interface HomeHeroProps {
   onOpenBooking: () => void;
 }
 
-export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => (
+export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => {
+  const { answerLead } = getRouteSeo('/');
+
+  return (
   <section>
     {/* Image only — no text overlay */}
     <div className="relative min-h-[100dvh] overflow-hidden bg-[#151515]">
@@ -30,14 +34,14 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => (
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <StaggerContainer className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8">
           <StaggerItem>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 glass-panel text-xs font-semibold tracking-[0.3em] text-[#8E7B62] uppercase">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 glass-panel text-xs font-semibold tracking-[0.3em] text-[#3D6B8C] uppercase">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Rothenbaumchaussee 156 • Hamburg</span>
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-normal text-white tracking-tight leading-[1.05] uppercase">
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-normal text-white tracking-tight leading-[1.05] uppercase text-balance">
               PREMIUM PERSONAL
               <br />
               TRAINING HAMBURG
@@ -45,14 +49,14 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => (
           </StaggerItem>
 
           <StaggerItem>
-            <h2 className="font-display text-xl sm:text-2xl text-[#8E7B62] font-normal italic">
+            <h2 className="font-display text-xl sm:text-2xl text-[#3D6B8C] font-normal italic">
               Trainiere deinen Körper. Stärke deinen Geist.
             </h2>
           </StaggerItem>
 
           <StaggerItem>
             <p className="text-base sm:text-lg text-muted max-w-xl mx-auto leading-relaxed font-body">
-              Persönliches Coaching für Körper und Geist – privat und diskret, an der Rothenbaumchaussee in Hamburg.
+              {answerLead}
             </p>
           </StaggerItem>
 
@@ -78,13 +82,13 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => (
           <StaggerItem>
             <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-muted border-t border-[#222222] max-w-xl mx-auto uppercase tracking-wider font-body">
               <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#8E7B62]" /> Absolute Diskretion
+                <Check className="w-3.5 h-3.5 text-[#3D6B8C]" /> Absolute Diskretion
               </span>
               <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#8E7B62]" /> 1:1 Betreuung
+                <Check className="w-3.5 h-3.5 text-[#3D6B8C]" /> 1:1 Betreuung
               </span>
               <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#8E7B62]" /> Transparente Preise
+                <Check className="w-3.5 h-3.5 text-[#3D6B8C]" /> Transparente Preise
               </span>
             </div>
           </StaggerItem>
@@ -92,4 +96,5 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => (
       </div>
     </div>
   </section>
-);
+  );
+};

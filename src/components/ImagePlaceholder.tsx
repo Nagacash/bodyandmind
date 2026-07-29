@@ -50,7 +50,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
 
       {(!loaded || error) && (
         <div className="absolute inset-0 bg-[#1A1A1A] shimmer-loader flex flex-col items-center justify-center p-4 text-center space-y-2">
-          <ImageIcon className="w-8 h-8 text-[#8E7B62]/60" />
+          <ImageIcon className="w-8 h-8 text-[#3D6B8C]/60" />
           <span className="text-xs text-muted font-mono">{alt}</span>
         </div>
       )}
@@ -59,7 +59,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
 
       {showBadge && (
         <div className="absolute top-3 right-3 opacity-80 group-hover:opacity-100 transition-opacity">
-          <div className="glass-panel px-2.5 py-1 rounded-none text-[10px] font-mono tracking-wider flex items-center gap-1.5 text-[#8E7B62]">
+          <div className="glass-panel px-2.5 py-1 rounded-none text-[10px] font-mono tracking-wider flex items-center gap-1.5 text-[#3D6B8C]">
             <Camera className="w-3 h-3" />
             <span>{label}</span>
           </div>

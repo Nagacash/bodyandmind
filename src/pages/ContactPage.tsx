@@ -6,6 +6,7 @@ import { SectionLabel } from '../components/ui/SectionLabel';
 import { GlassPanel } from '../components/ui/GlassPanel';
 import { RevealOnScroll } from '../components/ui/RevealOnScroll';
 import { hasMarketingConsent } from '../utils/cookieConsent';
+import { submitInquiry } from '../lib/submitInquiry';
 
 const CONTACT_HERO_IMAGE = '/images/insta3.webp';
 
@@ -21,6 +22,8 @@ export const ContactPage: React.FC = () => {
     privacy: false,
   });
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
 
   useEffect(() => {
     if (hasMarketingConsent()) {
@@ -32,7 +35,7 @@ export const ContactPage: React.FC = () => {
     setMapConsent(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
@@ -46,11 +49,36 @@ export const ContactPage: React.FC = () => {
       return;
     }
 
-    setFormSubmitted(true);
+    if (honeypot) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await submitInquiry(
+        {
+          source: 'contact',
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          privacyConsent: true,
+          interest: formData.interest,
+          message: formData.message,
+        },
+        honeypot
+      );
+      setFormSubmitted(true);
+    } catch (err) {
+      setErrorMsg(
+        err instanceof Error ? err.message : 'Anfrage konnte nicht gesendet werden.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="space-y-28 pt-28 pb-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
+    <div className="page-section-gap page-shell max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
       <PageHero
         badge="KONTAKT & ANFAHRT"
         title="Lernen wir uns kennen."
@@ -75,7 +103,7 @@ export const ContactPage: React.FC = () => {
               { step: '03', title: 'Durchstarten', desc: 'Start deines maßgeschneiderten Personal Trainings & Recovery-Programms.' },
             ].map((s) => (
               <div key={s.step} className="timeline-step p-6 bg-[#0F0F0F]/80 border border-[#222222] space-y-3">
-                <div className="font-mono text-xs font-bold text-[#8E7B62]">SCHRITT {s.step}</div>
+                <div className="font-mono text-xs font-bold text-[#3D6B8C]">SCHRITT {s.step}</div>
                 <h3 className="font-display text-lg text-white font-normal uppercase">{s.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{s.desc}</p>
               </div>
@@ -86,7 +114,7 @@ export const ContactPage: React.FC = () => {
 
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         <div className="lg:col-span-5 space-y-8">
-          <GlassPanel className="p-8 space-y-6">
+          <GlassPanel className="p-5 sm:p-8 space-y-6">
             <div className="space-y-2">
               <h2 className="font-display text-2xl text-white font-normal uppercase">
                 Studio Rothenbaum
@@ -98,7 +126,7 @@ export const ContactPage: React.FC = () => {
 
             <div className="space-y-4 text-xs text-muted">
               <div className="flex items-start gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222]">
-                <MapPin className="w-4 h-4 text-[#8E7B62] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#3D6B8C] shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white block mb-0.5">Adresse</span>
                   <span>{STUDIO_INFO.locationName}, {STUDIO_INFO.cityPostal}</span>
@@ -107,17 +135,17 @@ export const ContactPage: React.FC = () => {
               </div>
 
               <div className="flex items-start gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222]">
-                <Mail className="w-4 h-4 text-[#8E7B62] shrink-0 mt-0.5" />
+                <Mail className="w-4 h-4 text-[#3D6B8C] shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white block mb-0.5">E-Mail</span>
-                  <a href={`mailto:${STUDIO_INFO.email}`} className="text-[#8E7B62] hover:underline">
+                  <a href={`mailto:${STUDIO_INFO.email}`} className="text-[#3D6B8C] hover:underline">
                     {STUDIO_INFO.email}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222]">
-                <Globe className="w-4 h-4 text-[#8E7B62] shrink-0 mt-0.5" />
+                <Globe className="w-4 h-4 text-[#3D6B8C] shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white block mb-0.5">Webseite</span>
                   <span>{STUDIO_INFO.domain}</span>
@@ -127,7 +155,7 @@ export const ContactPage: React.FC = () => {
           </GlassPanel>
 
           <GlassPanel className="p-6 space-y-4 text-center">
-            <div className="flex items-center justify-center gap-2 text-[#8E7B62] text-xs font-semibold">
+            <div className="flex items-center justify-center gap-2 text-[#3D6B8C] text-xs font-semibold">
               <Navigation className="w-4 h-4" />
               <span>Interaktive Karte (DSGVO-konform)</span>
             </div>
@@ -139,7 +167,7 @@ export const ContactPage: React.FC = () => {
                 </p>
                 <button
                   onClick={handleLoadMap}
-                  className="px-5 py-2.5 rounded-none bg-[#8E7B62]/20 hover:bg-[#8E7B62] border border-[#8E7B62] text-[#8E7B62] hover:text-[#0F0F0F] text-xs font-bold transition-all cursor-pointer active:scale-[0.98]"
+                  className="px-5 py-2.5 rounded-none bg-[#3D6B8C]/20 hover:bg-[#3D6B8C] border border-[#3D6B8C] text-[#3D6B8C] hover:text-white text-xs font-bold transition-all cursor-pointer active:scale-[0.98]"
                 >
                   Karte jetzt laden
                 </button>
@@ -158,7 +186,7 @@ export const ContactPage: React.FC = () => {
           </GlassPanel>
         </div>
 
-        <GlassPanel className="lg:col-span-7 p-8 space-y-6">
+        <GlassPanel className="lg:col-span-7 p-5 sm:p-8 space-y-6">
           <div>
             <h2 className="font-display text-2xl text-white font-normal uppercase">
               Erstgespräch Anfragen
@@ -170,7 +198,7 @@ export const ContactPage: React.FC = () => {
 
           {formSubmitted ? (
             <div className="p-8 text-center space-y-4 bg-[#0F0F0F] border border-[#222222]">
-              <CheckCircle2 className="w-12 h-12 text-[#8E7B62] mx-auto" />
+              <CheckCircle2 className="w-12 h-12 text-[#3D6B8C] mx-auto" />
               <h3 className="font-display text-xl font-normal text-white uppercase">
                 Vielen Dank, {formData.name}!
               </h3>
@@ -180,6 +208,16 @@ export const ContactPage: React.FC = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="_gotcha"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
+              />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300">
@@ -191,7 +229,7 @@ export const ContactPage: React.FC = () => {
                     placeholder="Dein Name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#8E7B62]"
+                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C]"
                   />
                 </div>
                 <div className="space-y-2">
@@ -204,7 +242,7 @@ export const ContactPage: React.FC = () => {
                     placeholder="deine@email.de"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#8E7B62]"
+                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C]"
                   />
                 </div>
               </div>
@@ -216,7 +254,7 @@ export const ContactPage: React.FC = () => {
                 <select
                   value={formData.interest}
                   onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#8E7B62]"
+                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#3D6B8C]"
                 >
                   <option value="FLOW">Säule 01: FLOW (Boxen & Kickboxen)</option>
                   <option value="FORM">Säule 02: FORM (Kraft & Athletik)</option>
@@ -235,7 +273,7 @@ export const ContactPage: React.FC = () => {
                   placeholder="Deine Ziele, Fragen oder Wunschzeiten..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#8E7B62] resize-none"
+                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] resize-none"
                 />
               </div>
 
@@ -245,7 +283,7 @@ export const ContactPage: React.FC = () => {
                     type="checkbox"
                     checked={formData.privacy}
                     onChange={(e) => setFormData({ ...formData, privacy: e.target.checked })}
-                    className="mt-1 rounded-none border-[#222222] bg-[#0F0F0F] text-[#8E7B62]"
+                    className="mt-1 rounded-none border-[#222222] bg-[#0F0F0F] text-[#3D6B8C]"
                   />
                   <span className="text-xs text-muted">
                     Ich stimme der Datenverarbeitung gemäß der Datenschutzerklärung zu.
@@ -261,9 +299,10 @@ export const ContactPage: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full bg-[#8E7B62] hover:bg-[#A08C71] text-[#0F0F0F] py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+                disabled={loading}
+                  className="w-full min-h-[44px] bg-[#3D6B8C] hover:bg-[#5289AD] text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] disabled:opacity-50"
               >
-                <span>Jetzt Erstgespräch anfragen</span>
+                <span>{loading ? 'Wird gesendet...' : 'Jetzt Erstgespräch anfragen'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>

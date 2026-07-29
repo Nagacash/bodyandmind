@@ -18,7 +18,7 @@ interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
   return (
-    <div className="space-y-28 pt-28 pb-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
+    <div className="page-section-gap page-shell max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
       <PageHero
         badge="PHILOSOPHIE & INHABERIN"
         title="ÜBER BODY & MIND – Mehr als Training. Ein persönlicher Weg."
@@ -49,7 +49,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
             <p className="text-sm text-muted leading-relaxed font-light">
               &ldquo;Mit body & mind habe ich den Ort geschaffen, den ich mir selbst immer gewünscht habe: Ein Refugium der Ruhe, Qualität und maßgeschneiderten Begleitung mitten in Hamburg Rothenbaum.&rdquo;
             </p>
-            <div className="pt-2 font-display text-sm text-[#8E7B62] uppercase tracking-wider">
+            <div className="pt-2 font-display text-sm text-[#3D6B8C] uppercase tracking-wider">
               – Natalie Zimmermann
             </div>
           </div>
@@ -72,7 +72,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
               { title: 'Persönlich', desc: 'Enge Betreuung, tiefes Vertrauen und lückenlose Anpassung an deine Tagesform.', icon: Users },
             ].map((item) => (
               <div key={item.title} className="flex-1 p-6 sm:p-8 space-y-3">
-                <item.icon className="w-5 h-5 text-[#8E7B62]" />
+                <item.icon className="w-5 h-5 text-[#3D6B8C]" />
                 <h3 className="font-display text-lg text-white font-normal uppercase">{item.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{item.desc}</p>
               </div>
@@ -92,8 +92,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {BRAND_VALUES.map((val, i) => (
-              <div key={i} className="p-8 glass-panel space-y-3 hover:border-[#8E7B62]/30 transition-all">
-                <div className="text-xs font-mono font-bold text-[#8E7B62]">0{i + 1}</div>
+              <div key={i} className="p-8 glass-panel space-y-3 hover:border-[#3D6B8C]/30 transition-all">
+                <div className="text-xs font-mono font-bold text-[#3D6B8C]">0{i + 1}</div>
                 <h3 className="font-display text-xl text-white font-normal uppercase">{val.title}</h3>
                 <p className="text-sm text-muted leading-relaxed">{val.desc}</p>
               </div>

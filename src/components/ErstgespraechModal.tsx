@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BookingData, PillarType } from '../types';
-import { STUDIO_INFO } from '../data/studioData';
+import { submitInquiry } from '../lib/submitInquiry';
 import { X, CheckCircle2, ShieldCheck, Clock, Calendar, Send } from 'lucide-react';
 
 interface ErstgespraechModalProps {
@@ -33,6 +33,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
 
   useEffect(() => {
     if (isOpen) {
@@ -44,12 +45,13 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
       }));
       setSubmitted(false);
       setErrorMessage('');
+      setHoneypot('');
     }
   }, [isOpen, preselectedPillar, preselectedOptionName, customPackageSummary]);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
 
@@ -63,11 +65,36 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
       return;
     }
 
+    if (honeypot) {
+      return;
+    }
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      await submitInquiry(
+        {
+          source: 'booking',
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          privacyConsent: true,
+          pillar: formData.pillar,
+          selectedOptionName: formData.selectedOptionName,
+          timePreference: formData.timePreference,
+          preferredDays: formData.preferredDays,
+          notes: formData.notes,
+          customPackageSummary: formData.customPackageSummary,
+        },
+        honeypot
+      );
       setSubmitted(true);
-    }, 600);
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error ? err.message : 'Anfrage konnte nicht gesendet werden.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDayToggle = (day: string) => {
@@ -81,29 +108,30 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-md animate-in fade-in duration-200 font-body">
-      <div className="relative w-full max-w-2xl bg-[#0F0F0F] border border-[#222222] rounded-2xl shadow-2xl overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6 overflow-y-auto overscroll-contain bg-black/80 backdrop-blur-md animate-in fade-in duration-200 font-body">
+      <div className="relative w-full sm:max-w-2xl max-h-[92dvh] sm:max-h-[90dvh] flex flex-col bg-[#0F0F0F] border border-[#222222] sm:rounded-2xl shadow-2xl overflow-hidden my-0 sm:my-8">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-[#222222] bg-[#151515]">
-          <div>
-            <h2 className="font-display text-2xl font-normal text-white uppercase">
+        <div className="flex items-start sm:items-center justify-between gap-4 p-4 sm:p-6 border-b border-[#222222] bg-[#151515] shrink-0">
+          <div className="min-w-0 pr-2">
+            <h2 className="font-display text-xl sm:text-2xl font-normal text-white uppercase leading-tight">
               Erstgespräch vereinbaren
             </h2>
-            <p className="text-xs text-[#8E7B62] mt-1 font-body">
+            <p className="text-xs text-[#3D6B8C] mt-1 font-body">
               Kostenlos, unverbindlich & in Ruhe an der Rothenbaumchaussee
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-white rounded-none hover:bg-white/10 transition-colors"
+            className="touch-target shrink-0 flex items-center justify-center text-gray-400 hover:text-white rounded-none hover:bg-white/10 transition-colors"
+            aria-label="Schließen"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {submitted ? (
-          <div className="p-8 sm:p-10 text-center space-y-6">
-            <div className="w-16 h-16 bg-[#8E7B62]/15 border border-[#8E7B62] rounded-none flex items-center justify-center mx-auto text-[#8E7B62]">
+          <div className="overflow-y-auto flex-1 overscroll-contain p-6 sm:p-8 text-center space-y-6">
+            <div className="w-16 h-16 bg-[#3D6B8C]/15 border border-[#3D6B8C] rounded-none flex items-center justify-center mx-auto text-[#3D6B8C]">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div className="space-y-2">
@@ -116,7 +144,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             </div>
 
             <div className="p-4 rounded-none bg-[#151515] border border-[#222222] text-xs text-muted max-w-md mx-auto text-left space-y-1">
-              <div className="font-semibold text-[#8E7B62]">Zusammenfassung deiner Anfrage:</div>
+              <div className="font-semibold text-[#3D6B8C]">Zusammenfassung deiner Anfrage:</div>
               <div>• E-Mail: {formData.email}</div>
               <div>• Schwerpunkt: {formData.selectedOptionName || formData.pillar}</div>
               <div>• Wunschzeit: {formData.timePreference}</div>
@@ -127,18 +155,28 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
 
             <button
               onClick={onClose}
-              className="bg-[#8E7B62] text-[#0F0F0F] px-8 py-3 rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[#A08C71] transition-colors cursor-pointer"
+              className="bg-[#3D6B8C] text-white px-8 py-3 rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[#5289AD] transition-colors cursor-pointer"
             >
               Schließen
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="overflow-y-auto flex-1 overscroll-contain p-4 sm:p-8 space-y-6">
+            <input
+              type="text"
+              name="_gotcha"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
+            />
             {/* Context Badge if preselected */}
             {(formData.selectedOptionName || formData.customPackageSummary) && (
-              <div className="p-3.5 rounded-none bg-[#8E7B62]/10 border border-[#8E7B62]/30 text-xs text-[#E5D5C0] flex items-center justify-between">
+              <div className="p-3.5 rounded-none bg-[#3D6B8C]/10 border border-[#3D6B8C]/30 text-xs text-[#B8D4E8] flex items-center justify-between">
                 <div>
-                  <span className="font-semibold text-[#8E7B62] block mb-0.5">Ausgewählte Option:</span>
+                  <span className="font-semibold text-[#3D6B8C] block mb-0.5">Ausgewählte Option:</span>
                   <span>{formData.customPackageSummary || formData.selectedOptionName}</span>
                 </div>
               </div>
@@ -161,9 +199,9 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                       key={p.id}
                       type="button"
                       onClick={() => setFormData({ ...formData, pillar: p.id as PillarType })}
-                      className={`py-2 px-3 rounded-none text-xs font-medium border transition-all text-center ${
+                      className={`min-h-[44px] py-2.5 px-3 rounded-none text-xs font-medium border transition-all text-center ${
                         formData.pillar === p.id
-                          ? 'bg-[#8E7B62]/20 border-[#8E7B62] text-[#8E7B62]'
+                          ? 'bg-[#3D6B8C]/20 border-[#3D6B8C] text-[#3D6B8C]'
                           : 'bg-[#151515] border-[#222222] text-gray-300 hover:border-white/20'
                       }`}
                     >
@@ -186,7 +224,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                   placeholder="z.B. Alex Smith"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#8E7B62] transition-colors"
+                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] transition-colors"
                 />
               </div>
 
@@ -200,7 +238,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                   placeholder="deine@email.de"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#8E7B62] transition-colors"
+                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] transition-colors"
                 />
               </div>
             </div>
@@ -208,7 +246,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             {/* Time Preferences */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2 flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#8E7B62]" />
+                <Clock className="w-3.5 h-3.5 text-[#3D6B8C]" />
                 <span>Bevorzugte Tageszeit</span>
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -227,9 +265,9 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                         timePreference: t.id as BookingData['timePreference'],
                       })
                     }
-                    className={`py-2 px-2.5 rounded-none text-xs font-medium border transition-all text-center ${
+                    className={`min-h-[44px] py-2.5 px-2.5 rounded-none text-xs font-medium border transition-all text-center ${
                       formData.timePreference === t.id
-                        ? 'bg-[#8E7B62]/20 border-[#8E7B62] text-[#8E7B62]'
+                        ? 'bg-[#3D6B8C]/20 border-[#3D6B8C] text-[#3D6B8C]'
                         : 'bg-[#151515] border-[#222222] text-gray-400 hover:border-white/20'
                     }`}
                   >
@@ -242,7 +280,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             {/* Preferred Days */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2 flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#8E7B62]" />
+                <Calendar className="w-3.5 h-3.5 text-[#3D6B8C]" />
                 <span>Wunschtage (optional)</span>
               </label>
               <div className="flex flex-wrap gap-2">
@@ -253,9 +291,9 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                       key={day}
                       type="button"
                       onClick={() => handleDayToggle(day)}
-                      className={`px-3 py-1.5 rounded-none text-xs font-medium border transition-all ${
+                      className={`min-h-[44px] px-3 py-2.5 rounded-none text-xs font-medium border transition-all ${
                         selected
-                          ? 'bg-[#8E7B62] text-[#0F0F0F] border-[#8E7B62] font-bold'
+                          ? 'bg-[#3D6B8C] text-white border-[#3D6B8C] font-bold'
                           : 'bg-[#151515] border-[#222222] text-gray-400 hover:border-white/20'
                       }`}
                     >
@@ -276,7 +314,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                 placeholder="z.B. Stressabbau, Haltung, Vorbereitung auf Sommer, etc."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#8E7B62] transition-colors resize-none"
+                className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] transition-colors resize-none"
               />
             </div>
 
@@ -287,11 +325,11 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                   type="checkbox"
                   checked={formData.privacyConsent}
                   onChange={(e) => setFormData({ ...formData, privacyConsent: e.target.checked })}
-                  className="mt-1 rounded-none border-[#222222] bg-[#151515] text-[#8E7B62] focus:ring-[#8E7B62]"
+                  className="mt-1 rounded-none border-[#222222] bg-[#151515] text-[#3D6B8C] focus:ring-[#3D6B8C]"
                 />
                 <span className="text-xs text-muted leading-relaxed">
                   Ich stimme der Verarbeitung meiner Daten zur Kontaktaufnahme gemäß der{' '}
-                  <span className="text-[#8E7B62] underline">Datenschutzerklärung</span> zu.
+                  <span className="text-[#3D6B8C] underline">Datenschutzerklärung</span> zu.
                 </span>
               </label>
             </div>
@@ -307,7 +345,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#8E7B62] hover:bg-[#A08C71] text-[#0F0F0F] py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
+                className="w-full bg-[#3D6B8C] hover:bg-[#5289AD] text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
               >
                 {loading ? (
                   <span>Wird gesendet...</span>
@@ -319,7 +357,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                 )}
               </button>
               <div className="text-center mt-3 text-[11px] text-muted flex items-center justify-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#8E7B62]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#3D6B8C]" />
                 <span>Geschützter Rahmen & absolute Diskretion</span>
               </div>
             </div>

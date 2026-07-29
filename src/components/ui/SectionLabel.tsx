@@ -7,7 +7,7 @@ interface SectionLabelProps {
 
 export const SectionLabel: React.FC<SectionLabelProps> = ({ children, className = '' }) => (
   <div
-    className={`text-xs font-bold uppercase tracking-[0.3em] text-[#8E7B62] ${className}`}
+    className={`text-xs font-bold uppercase tracking-[0.3em] text-accent ${className}`}
   >
     {children}
   </div>
