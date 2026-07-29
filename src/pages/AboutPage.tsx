@@ -1,0 +1,123 @@
+import React from 'react';
+import { BRAND_VALUES } from '../data/studioData';
+import { PillarType } from '../types';
+import { Clock, Compass, Users } from 'lucide-react';
+import { PageHero } from '../components/ui/PageHero';
+import { SectionLabel } from '../components/ui/SectionLabel';
+import { PrimaryButton } from '../components/ui/PrimaryButton';
+import { GlassPanel } from '../components/ui/GlassPanel';
+import { RevealOnScroll } from '../components/ui/RevealOnScroll';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
+
+const ABOUT_HERO_IMAGE = '/images/sab8.webp';
+const ABOUT_FOUNDER_IMAGE = '/images/sab8.webp';
+
+interface AboutPageProps {
+  onOpenBooking: (pillar?: PillarType, optionName?: string) => void;
+}
+
+export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
+  return (
+    <div className="space-y-28 pt-28 pb-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
+      <PageHero
+        badge="PHILOSOPHIE & INHABERIN"
+        title="ÜBER BODY & MIND – Mehr als Training. Ein persönlicher Weg."
+        description="In einer Welt voller Hektik und Anonymität schaffen wir an der Rothenbaumchaussee einen Ort der persönlichen Betreuung, Diskretion und nachhaltigen Transformation."
+        imageSrc={ABOUT_HERO_IMAGE}
+        imageAlt="Über body & mind – Natalie Zimmermann"
+      />
+
+      <RevealOnScroll>
+        <GlassPanel className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-5">
+            <ImagePlaceholder
+              src={ABOUT_FOUNDER_IMAGE}
+              alt="Natalie Zimmermann Founder Portrait"
+              aspectRatio="4/3"
+              showBadge={false}
+            />
+          </div>
+
+          <div className="lg:col-span-7 space-y-4">
+            <SectionLabel>Unser Mindset & Gründerin</SectionLabel>
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Privates Studio-Setting statt Massenfitness
+            </h2>
+            <p className="text-sm text-muted leading-relaxed font-light">
+              Massenstudios setzen auf Anonymität und ständige Wechsel. Bei body & mind betrittst du ein ruhiges, intimes Refugium. Hier gibt es keine Ablenkung, keine Zuschauer und keine Warteschlangen an Geräten.
+            </p>
+            <p className="text-sm text-muted leading-relaxed font-light">
+              &ldquo;Mit body & mind habe ich den Ort geschaffen, den ich mir selbst immer gewünscht habe: Ein Refugium der Ruhe, Qualität und maßgeschneiderten Begleitung mitten in Hamburg Rothenbaum.&rdquo;
+            </p>
+            <div className="pt-2 font-display text-sm text-[#8E7B62] uppercase tracking-wider">
+              – Natalie Zimmermann
+            </div>
+          </div>
+        </GlassPanel>
+      </RevealOnScroll>
+
+      <RevealOnScroll>
+        <section className="space-y-8">
+          <div className="max-w-2xl space-y-2">
+            <SectionLabel>Für wen wir da sind</SectionLabel>
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Maßgeschneidert für deinen Lebensstil
+            </h2>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-0 sm:gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#222222] border border-[#222222]">
+            {[
+              { title: 'Zeiteffizient', desc: 'Maximale Wirkung in minimaler Zeit. Perfekt strukturiert für vielbeschäftigte Terminkalender und Führungskräfte.', icon: Clock },
+              { title: 'Ganzheitlich', desc: 'Gezielte Symbiose aus Kraft, Bewegung, mentalem Stressabbau und physiologischer Recovery.', icon: Compass },
+              { title: 'Persönlich', desc: 'Enge Betreuung, tiefes Vertrauen und lückenlose Anpassung an deine Tagesform.', icon: Users },
+            ].map((item) => (
+              <div key={item.title} className="flex-1 p-6 sm:p-8 space-y-3">
+                <item.icon className="w-5 h-5 text-[#8E7B62]" />
+                <h3 className="font-display text-lg text-white font-normal uppercase">{item.title}</h3>
+                <p className="text-xs text-muted leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </RevealOnScroll>
+
+      <RevealOnScroll>
+        <section className="space-y-8">
+          <div className="max-w-2xl space-y-2">
+            <SectionLabel>Unsere Werte</SectionLabel>
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Woran wir uns messen lassen
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {BRAND_VALUES.map((val, i) => (
+              <div key={i} className="p-8 glass-panel space-y-3 hover:border-[#8E7B62]/30 transition-all">
+                <div className="text-xs font-mono font-bold text-[#8E7B62]">0{i + 1}</div>
+                <h3 className="font-display text-xl text-white font-normal uppercase">{val.title}</h3>
+                <p className="text-sm text-muted leading-relaxed">{val.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </RevealOnScroll>
+
+      <RevealOnScroll>
+        <GlassPanel accent className="p-8 sm:p-12 space-y-6">
+          <div className="max-w-2xl space-y-4">
+            <SectionLabel>Gründerin & Vision</SectionLabel>
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Natalie Zimmermann
+            </h2>
+            <p className="text-sm text-muted leading-relaxed font-light">
+              &ldquo;Mit body & mind habe ich den Ort geschaffen, den ich mir selbst immer gewünscht habe: Ein Refugium der Ruhe, Qualität und maßgeschneiderten Begleitung mitten in Hamburg Rothenbaum. Ich freue mich darauf, dich persönlich kennenzulernen.&rdquo;
+            </p>
+          </div>
+          <PrimaryButton onClick={() => onOpenBooking('GENERAL')} showArrow>
+            Erstgespräch vereinbaren
+          </PrimaryButton>
+        </GlassPanel>
+      </RevealOnScroll>
+    </div>
+  );
+};

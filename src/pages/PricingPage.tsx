@@ -1,0 +1,292 @@
+import React, { useState } from 'react';
+import { PRICING_CARDS, STUDIO_INFO } from '../data/studioData';
+import { PillarType } from '../types';
+import { Check, Sparkles, ArrowRight, Calculator, PlusCircle } from 'lucide-react';
+import { PageHero } from '../components/ui/PageHero';
+import { SectionLabel } from '../components/ui/SectionLabel';
+import { GlassPanel } from '../components/ui/GlassPanel';
+import { RevealOnScroll } from '../components/ui/RevealOnScroll';
+
+const PRICING_HERO_IMAGE = '/images/beach1.webp';
+
+interface PricingPageProps {
+  onOpenBooking: (pillar?: PillarType, optionName?: string, customSummary?: string) => void;
+}
+
+export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
+  const [selectedPillar, setSelectedPillar] = useState<'FLOW' | 'FORM'>('FLOW');
+  const [selectedTier, setSelectedTier] = useState<'Essential' | 'Professional'>('Professional');
+  const [addRecoverySessions, setAddRecoverySessions] = useState<number>(0);
+  const [includeNutrition, setIncludeNutrition] = useState<boolean>(false);
+
+  const baseCard = PRICING_CARDS.find(
+    (c) => c.pillar === selectedPillar && c.tier === selectedTier
+  ) || PRICING_CARDS[0];
+
+  const recoveryCost = addRecoverySessions * 70;
+  const nutritionCost = includeNutrition ? 80 : 0;
+  const calculatedTotal = baseCard.totalPrice + recoveryCost + nutritionCost;
+
+  const customSummaryText = `${baseCard.pillar} ${baseCard.tier} (${baseCard.rhythm}) + ${addRecoverySessions}x Recovery + ${includeNutrition ? 'Ernährungsplan' : 'Kein Ernährungsplan'} = Gesamt: ${calculatedTotal} €`;
+
+  return (
+    <div className="space-y-28 pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
+      <div className="space-y-4">
+        <PageHero
+          badge="MITGLIEDSCHAFTEN & PAKETE"
+          title="Transparente Konditionen für höchste Qualität."
+          description="Klar strukturierte Pakete ohne versteckte Kosten. Qualität, Diskretion und kontinuierliche Begleitung in jeder Session."
+          imageSrc={PRICING_HERO_IMAGE}
+          imageAlt="Mitgliedschaften – Premium Personal Training Hamburg"
+        />
+        <p className="text-xs text-[#8E7B62] font-medium px-4 sm:px-0">{STUDIO_INFO.pAngvTaxNote}</p>
+      </div>
+
+      <RevealOnScroll>
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {PRICING_CARDS.map((card) => (
+            <div
+              key={card.id}
+              className={`rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between relative transition-all duration-300 ${
+                card.isPopular
+                  ? 'glass-panel border-2 border-[#8E7B62] shadow-[0_20px_40px_-15px_rgba(142,123,98,0.12)]'
+                  : 'glass-panel hover:border-white/20'
+              }`}
+            >
+              {card.isPopular && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#8E7B62] text-[#0F0F0F] text-[10px] font-bold uppercase tracking-widest px-4 py-1 flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" /> BELIEBT
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <div className="text-xs font-mono font-bold text-[#8E7B62]">
+                    {card.pillar} • {card.tier}
+                  </div>
+                  <h3 className="font-display text-xl font-normal text-white uppercase">
+                    {card.pillar} {card.tier}
+                  </h3>
+                  <div className="text-xs text-muted font-medium">{card.rhythm}</div>
+                </div>
+
+                <div className="pt-2 border-t border-white/10">
+                  <div className="flex items-baseline gap-1">
+                    <span className="font-display text-3xl font-normal text-white tabular-nums">
+                      {card.pricePerSession} €
+                    </span>
+                    <span className="text-xs text-muted">/ Session</span>
+                  </div>
+                  <div className="text-xs font-semibold text-[#8E7B62] mt-1">{card.details}</div>
+                </div>
+
+                <ul className="space-y-2.5 pt-2 text-xs text-muted">
+                  {card.features.map((feat, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#8E7B62] shrink-0 mt-0.5" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-4 border-t border-white/10">
+                <button
+                  onClick={() =>
+                    onOpenBooking(
+                      card.pillar as PillarType,
+                      `${card.pillar} ${card.tier}`,
+                      `${card.pillar} ${card.tier} (${card.details})`
+                    )
+                  }
+                  className={`w-full py-3 rounded-none text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-[0.98] ${
+                    card.isPopular
+                      ? 'bg-[#8E7B62] hover:bg-[#A08C71] text-[#0F0F0F]'
+                      : 'bg-[#0F0F0F] border border-[#222222] hover:bg-[#8E7B62] text-white hover:text-[#0F0F0F]'
+                  }`}
+                >
+                  Paket anfragen
+                </button>
+              </div>
+            </div>
+          ))}
+        </section>
+      </RevealOnScroll>
+
+      <RevealOnScroll>
+        <GlassPanel className="p-8 space-y-8">
+          <div className="max-w-2xl space-y-2">
+            <SectionLabel>Flexible Modul-Erweiterungen</SectionLabel>
+            <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+              Erweitere dein Paket individuell
+            </h2>
+          </div>
+
+          <div className="divide-y divide-[#222222]">
+            {[
+              { title: '+ Frequency Boost', desc: 'Füge deinem Paket wöchentlich 1 zusätzliche Session hinzu für schnelleren Fortschritt bei reduziertem Session-Tarif.' },
+              { title: 'Recovery Upgrade', desc: 'Ergänze modulare Recovery-Anwendungen (IHHT, Atemtraining, Infrarot) für +70 € pro zusätzlicher Session.' },
+              { title: 'Ernährungsplan Add-on', desc: 'Optionaler maßgeschneiderter Ernährungsplan zur Unterstützung deiner körperlichen Transformation für 80 € pro Paket-Laufzeit.' },
+            ].map((addon) => (
+              <div key={addon.title} className="py-6 first:pt-0 last:pb-0 flex items-start gap-4">
+                <PlusCircle className="w-5 h-5 text-[#8E7B62] shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-display text-base font-normal text-white uppercase mb-1">{addon.title}</h3>
+                  <p className="text-xs text-muted leading-relaxed">{addon.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </GlassPanel>
+      </RevealOnScroll>
+
+      <RevealOnScroll>
+        <GlassPanel accent className="p-8 sm:p-12 space-y-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div className="space-y-1">
+              <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#8E7B62] flex items-center gap-2">
+                <Calculator className="w-4 h-4" />
+                Interaktiver Paket-Kalkulator
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
+                Stelle dein persönliches Paket zusammen
+              </h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7 space-y-6">
+              <div className="space-y-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-gray-300">
+                  1. Säule wählen
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(['FLOW', 'FORM'] as const).map((p) => (
+                    <button
+                      key={p}
+                      onClick={() => setSelectedPillar(p)}
+                      className={`py-3 px-4 rounded-none text-xs font-bold transition-all cursor-pointer active:scale-[0.98] ${
+                        selectedPillar === p
+                          ? 'bg-[#8E7B62] text-[#0F0F0F]'
+                          : 'bg-[#0F0F0F] border border-[#222222] text-gray-300 hover:bg-white/10'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-gray-300">
+                  2. Frequenz / Laufzeit wählen
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(['Essential', 'Professional'] as const).map((t) => (
+                    <button
+                      key={t}
+                      onClick={() => setSelectedTier(t)}
+                      className={`py-3 px-4 rounded-none text-xs font-bold transition-all cursor-pointer active:scale-[0.98] ${
+                        selectedTier === t
+                          ? 'bg-[#8E7B62] text-[#0F0F0F]'
+                          : 'bg-[#0F0F0F] border border-[#222222] text-gray-300 hover:bg-white/10'
+                      }`}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex justify-between items-center text-xs">
+                  <label className="font-semibold uppercase tracking-wider text-gray-300">
+                    3. Recovery-Sessions (+70 € / Session)
+                  </label>
+                  <span className="font-mono text-[#8E7B62] font-bold tabular-nums">
+                    {addRecoverySessions} Sessions (+{recoveryCost} €)
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  {[0, 2, 4, 8].map((count) => (
+                    <button
+                      key={count}
+                      onClick={() => setAddRecoverySessions(count)}
+                      className={`flex-1 py-2 rounded-none text-xs font-medium border transition-all cursor-pointer active:scale-[0.98] ${
+                        addRecoverySessions === count
+                          ? 'bg-[#8E7B62]/20 border-[#8E7B62] text-[#8E7B62]'
+                          : 'bg-[#0F0F0F] border-[#222222] text-gray-400 hover:border-white/20'
+                      }`}
+                    >
+                      {count === 0 ? 'Keine' : `${count}x`}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <label className="flex items-center gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222] cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={includeNutrition}
+                  onChange={(e) => setIncludeNutrition(e.target.checked)}
+                  className="rounded-none border-[#222222] bg-[#151515] text-[#8E7B62]"
+                />
+                <div className="text-xs">
+                  <span className="font-semibold text-white block">Maßgeschneiderter Ernährungsplan (+80 €)</span>
+                  <span className="text-muted">Optimiert für Fettabbau, Muskelaufbau oder hormonelle Balance.</span>
+                </div>
+              </label>
+            </div>
+
+            <div className="lg:col-span-5 p-6 glass-panel space-y-6">
+              <h3 className="font-display text-xl font-normal text-white uppercase border-b border-white/10 pb-3">
+                Deine Paketzusammenstellung
+              </h3>
+
+              <div className="space-y-2 text-xs">
+                <div className="flex justify-between text-muted">
+                  <span>Basis: {baseCard.pillar} {baseCard.tier}</span>
+                  <span className="font-mono font-semibold text-white tabular-nums">{baseCard.totalPrice} €</span>
+                </div>
+                {addRecoverySessions > 0 && (
+                  <div className="flex justify-between text-muted">
+                    <span>{addRecoverySessions}x Recovery (+70 €)</span>
+                    <span className="font-mono font-semibold text-white tabular-nums">+{recoveryCost} €</span>
+                  </div>
+                )}
+                {includeNutrition && (
+                  <div className="flex justify-between text-muted">
+                    <span>Ernährungsplan Add-on</span>
+                    <span className="font-mono font-semibold text-white tabular-nums">+80 €</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="pt-4 border-t border-white/10 space-y-1">
+                <div className="text-xs text-muted uppercase tracking-widest">Gesamtpreis:</div>
+                <div className="font-display text-4xl font-normal text-[#8E7B62] tabular-nums">
+                  {calculatedTotal} €
+                </div>
+                <div className="text-[11px] text-muted">{STUDIO_INFO.pAngvTaxNote}</div>
+              </div>
+
+              <button
+                onClick={() =>
+                  onOpenBooking(
+                    selectedPillar as PillarType,
+                    `Individuelles Paket: ${selectedPillar} ${selectedTier}`,
+                    customSummaryText
+                  )
+                }
+                className="w-full bg-[#8E7B62] hover:bg-[#A08C71] text-[#0F0F0F] py-3.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+              >
+                <span>Dieses Wunschpaket anfragen</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </GlassPanel>
+      </RevealOnScroll>
+    </div>
+  );
+};

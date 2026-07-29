@@ -1,0 +1,6 @@
+{
+  "name": "body & mind by Natalie Zimmermann",
+  "description": "Private premium studio for Personal Training, Recovery, and Stress Regulation in Hamburg Rothenbaumchaussee.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
