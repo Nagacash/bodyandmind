@@ -10,16 +10,7 @@ import { RevealOnScroll } from '../components/ui/RevealOnScroll';
 import { ImagePlaceholder } from '../components/ImagePlaceholder';
 
 const ABOUT_HERO_IMAGE = '/images/sab8.webp';
-const ABOUT_TEAM_IMAGES = [
-  {
-    src: '/images2/6.webp',
-    alt: 'Erhan – Personal Trainer bei body & mind',
-  },
-  {
-    src: '/images2/7.webp',
-    alt: 'Erhan – Personal Trainer bei body & mind',
-  },
-] as const;
+const NATALIE_MINDSET_IMAGE = '/team/Natalie.webp';
 
 interface AboutPageProps {
   onOpenBooking: (pillar?: PillarType, optionName?: string) => void;
@@ -37,26 +28,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
       />
 
       <RevealOnScroll>
-        <GlassPanel className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-5 space-y-2">
-            <div className="grid grid-cols-2 gap-3">
-              {ABOUT_TEAM_IMAGES.map((image) => (
-                <ImagePlaceholder
-                  key={image.src}
-                  src={image.src}
-                  alt={image.alt}
-                  aspectRatio="3/4"
-                  objectFit="contain"
-                  showBadge={false}
-                />
-              ))}
-            </div>
+        <GlassPanel brandTrioTop className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-brand-plum/20">
+          <div className="lg:col-span-5 space-y-3">
+            <ImagePlaceholder
+              src={NATALIE_MINDSET_IMAGE}
+              alt="Natalie Zimmermann – Gründerin von body & mind"
+              aspectRatio="3/4"
+              objectFit="cover"
+              showBadge={false}
+            />
             <p className="text-xs font-semibold uppercase tracking-wider text-accent text-center">
-              Erhan · Personal Trainer
+              Natalie Zimmermann · Gründerin
             </p>
           </div>
 
-          <div className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-7 space-y-5">
             <SectionLabel>Unser Mindset & Gründerin</SectionLabel>
             <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
               Privates Studio-Setting statt Massenfitness
@@ -64,12 +50,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
             <p className="text-sm text-muted leading-relaxed font-light">
               Massenstudios setzen auf Anonymität und ständige Wechsel. Bei body & mind betrittst du ein ruhiges, intimes Refugium. Hier gibt es keine Ablenkung, keine Zuschauer und keine Warteschlangen an Geräten.
             </p>
-            <p className="text-sm text-muted leading-relaxed font-light">
-              &ldquo;Mit body & mind habe ich den Ort geschaffen, den ich mir selbst immer gewünscht habe: Ein Refugium der Ruhe, Qualität und maßgeschneiderten Begleitung mitten in Hamburg Rothenbaum.&rdquo;
-            </p>
-            <div className="pt-2 font-display text-sm text-accent uppercase tracking-wider">
-              – Natalie Zimmermann
-            </div>
+            <blockquote className="border-l-2 border-brand-red/50 pl-5 sm:pl-6 space-y-3">
+              <p className="text-sm text-muted leading-relaxed font-light italic">
+                &ldquo;Mit body & mind habe ich den Ort geschaffen, den ich mir selbst immer gewünscht habe: Ein Refugium der Ruhe, Qualität und maßgeschneiderten Begleitung mitten in Hamburg Rothenbaum.&rdquo;
+              </p>
+              <footer className="font-display text-sm text-brand-plum uppercase tracking-wider not-italic">
+                – Natalie Zimmermann
+              </footer>
+            </blockquote>
           </div>
         </GlassPanel>
       </RevealOnScroll>
