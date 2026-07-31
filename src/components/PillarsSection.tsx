@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { CORE_PILLARS } from '../data/studioData';
+import { PILLAR_COLORS, type PillarId } from '../lib/brandColors';
 import { ImagePlaceholder } from './ImagePlaceholder';
 import { SectionLabel } from './ui/SectionLabel';
 import { RevealOnScroll } from './ui/RevealOnScroll';
@@ -29,6 +30,7 @@ export const PillarsSection: React.FC = () => (
     <ol className="space-y-0 divide-y divide-[#222222]">
       {CORE_PILLARS.map((pillar, index) => {
         const imageRight = index % 2 === 1;
+        const colors = PILLAR_COLORS[pillar.id as PillarId];
 
         return (
           <RevealOnScroll key={pillar.id} delay={index * 0.08}>
@@ -46,7 +48,7 @@ export const PillarsSection: React.FC = () => (
                     label={`FOTO PLATZHALTER: ${pillar.name}`}
                     aspectRatio="4/3"
                     showBadge={pillar.id === 'form'}
-                    className="transition-all duration-500 group-hover:border-[#3D6B8C]/40"
+                    className={`transition-all duration-500 ${colors.borderHoverClass}`}
                   />
                 </div>
 
@@ -54,19 +56,19 @@ export const PillarsSection: React.FC = () => (
                 <div className={`space-y-5 ${imageRight ? 'lg:[direction:ltr]' : ''}`}>
                   <div className="flex items-center gap-4">
                     <span
-                      className="font-display text-5xl sm:text-6xl leading-none text-[#3D6B8C]/25 select-none tabular-nums"
+                      className={`font-display text-5xl sm:text-6xl leading-none ${colors.watermarkClass} select-none tabular-nums`}
                       aria-hidden="true"
                     >
                       {pillar.number}
                     </span>
-                    <div className="h-px flex-1 bg-[#222222] group-hover:bg-[#3D6B8C]/30 transition-colors" />
+                    <div className={`h-px flex-1 bg-[#222222] transition-colors ${colors.dividerHoverClass}`} />
                   </div>
 
                   <div className="space-y-3">
                     <h3 className="font-display text-3xl sm:text-4xl text-white font-normal uppercase tracking-tight">
                       {pillar.name}
                     </h3>
-                    <p className="text-sm sm:text-base text-[#3D6B8C] font-body italic">
+                    <p className={`text-sm sm:text-base ${colors.accentClass} font-body italic`}>
                       {pillar.tagline}
                     </p>
                   </div>
@@ -77,7 +79,7 @@ export const PillarsSection: React.FC = () => (
 
                   <Link
                     to={`/${pillar.id}`}
-                    className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.15em] text-[#3D6B8C] hover:text-white transition-colors pt-1 group/link"
+                    className={`inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.15em] ${colors.accentClass} hover:text-white transition-colors pt-1 group/link`}
                   >
                     <span>{pillar.linkText}</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />

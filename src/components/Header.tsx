@@ -70,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
                   className={({ isActive }) =>
                     `px-3 py-2 text-xs uppercase tracking-widest font-medium transition-all relative ${
                       isActive
-                        ? 'text-[#3D6B8C]'
+                        ? 'text-accent'
                         : 'text-gray-300 hover:text-white hover:bg-white/5'
                     }`
                   }
@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
                     <>
                       {item.label}
                       {isActive && (
-                        <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#3D6B8C]" />
+                        <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-accent" />
                       )}
                     </>
                   )}
@@ -91,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
               <button
                 onClick={onOpenBooking}
                 id="header-cta-button"
-                className="bg-[#3D6B8C] hover:bg-[#5289AD] text-white px-4 lg:px-5 py-2.5 min-h-[44px] rounded-none text-xs font-bold tracking-wider uppercase transition-all shadow-md hover:shadow-lg flex items-center gap-2 group cursor-pointer active:scale-[0.98]"
+                className="bg-accent hover:bg-accent-hover text-white px-4 lg:px-5 py-2.5 min-h-[44px] rounded-none text-xs font-bold tracking-wider uppercase transition-all shadow-md hover:shadow-lg flex items-center gap-2 group cursor-pointer active:scale-[0.98]"
               >
                 <span className="lg:hidden">Erstgespräch</span>
                 <span className="hidden lg:inline">Erstgespräch vereinbaren</span>
@@ -102,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
             <div className="flex items-center gap-2 md:hidden">
               <button
                 onClick={onOpenBooking}
-                className="bg-[#3D6B8C] text-white px-4 py-2.5 min-h-[44px] rounded-none text-xs font-bold tracking-wider uppercase active:scale-[0.98]"
+                className="bg-accent text-white px-4 py-2.5 min-h-[44px] rounded-none text-xs font-bold tracking-wider uppercase active:scale-[0.98]"
               >
                 Erstgespräch
               </button>
@@ -155,7 +155,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
                     className={({ isActive }) =>
                       `block text-left py-3.5 px-4 min-h-[44px] text-lg font-medium transition-colors ${
                         isActive
-                          ? 'bg-[#3D6B8C]/15 text-[#3D6B8C]'
+                          ? 'bg-accent/15 text-accent'
                           : 'text-gray-200 hover:bg-white/5'
                       }`
                     }
@@ -173,13 +173,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
                 setMobileMenuOpen(false);
                 onOpenBooking();
               }}
-              className="w-full bg-[#3D6B8C] text-white py-3.5 rounded-none font-bold tracking-wider uppercase text-sm flex items-center justify-center gap-2 active:scale-[0.98]"
+              className="w-full bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none font-bold tracking-wider uppercase text-sm flex items-center justify-center gap-2 active:scale-[0.98]"
             >
               <span>Erstgespräch vereinbaren</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <div className="text-center text-xs text-gray-400 flex items-center justify-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#3D6B8C]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-accent" />
               <span>Privates Studio in Hamburg Rothenbaum</span>
             </div>
           </div>

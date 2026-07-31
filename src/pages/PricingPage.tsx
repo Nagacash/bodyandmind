@@ -65,7 +65,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
           imageSrc={PRICING_HERO_IMAGE}
           imageAlt="Mitgliedschaften – Premium Personal Training Hamburg"
         />
-        <p className="text-xs text-[#3D6B8C] font-medium px-4 sm:px-0">{STUDIO_INFO.pAngvTaxNote}</p>
+        <p className="text-xs text-accent font-medium px-4 sm:px-0">{STUDIO_INFO.pAngvTaxNote}</p>
       </div>
 
       <RevealOnScroll>
@@ -75,19 +75,19 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
               key={card.id}
               className={`rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between relative transition-all duration-300 ${
                 card.isPopular
-                  ? 'glass-panel border-2 border-[#3D6B8C] shadow-[0_20px_40px_-15px_rgba(61,107,140,0.12)]'
+                  ? 'glass-panel border-2 border-accent shadow-[0_20px_40px_-15px_rgba(61,107,140,0.12)]'
                   : 'glass-panel hover:border-white/20'
               }`}
             >
               {card.isPopular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#3D6B8C] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 flex items-center gap-1">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-accent text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 flex items-center gap-1">
                   <Sparkles className="w-3 h-3" /> BELIEBT
                 </div>
               )}
 
               <div className="space-y-4">
                 <div className="space-y-1">
-                  <div className="text-xs font-mono font-bold text-[#3D6B8C]">
+                  <div className="text-xs font-mono font-bold text-accent">
                     {card.pillar} • {card.tier}
                   </div>
                   <h3 className="font-display text-xl font-normal text-white uppercase">
@@ -103,13 +103,13 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                     </span>
                     <span className="text-xs text-muted">/ Session</span>
                   </div>
-                  <div className="text-xs font-semibold text-[#3D6B8C] mt-1">{card.details}</div>
+                  <div className="text-xs font-semibold text-accent mt-1">{card.details}</div>
                 </div>
 
                 <ul className="space-y-2.5 pt-2 text-xs text-muted">
                   {card.features.map((feat, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#3D6B8C] shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -127,8 +127,8 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                   }
                   className={`w-full py-3 rounded-none text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-[0.98] ${
                     card.isPopular
-                      ? 'bg-[#3D6B8C] hover:bg-[#5289AD] text-white'
-                      : 'bg-[#0F0F0F] border border-[#222222] hover:bg-[#3D6B8C] text-white hover:text-white'
+                      ? 'bg-accent hover:bg-accent-hover text-white'
+                      : 'bg-[#0F0F0F] border border-[#222222] hover:bg-accent text-white hover:text-white'
                   }`}
                 >
                   Paket anfragen
@@ -155,7 +155,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
               { title: 'Ernährungsplan Add-on', desc: 'Optionaler maßgeschneiderter Ernährungsplan zur Unterstützung deiner körperlichen Transformation für 80 € pro Paket-Laufzeit.' },
             ].map((addon) => (
               <div key={addon.title} className="py-6 first:pt-0 last:pb-0 flex items-start gap-4">
-                <PlusCircle className="w-5 h-5 text-[#3D6B8C] shrink-0 mt-0.5" />
+                <PlusCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                 <div>
                   <h3 className="font-display text-base font-normal text-white uppercase mb-1">{addon.title}</h3>
                   <p className="text-xs text-muted leading-relaxed">{addon.desc}</p>
@@ -170,7 +170,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
         <GlassPanel accent className="p-8 sm:p-12 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
             <div className="space-y-1">
-              <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#3D6B8C] flex items-center gap-2">
+              <div className="text-xs font-bold uppercase tracking-[0.3em] text-accent flex items-center gap-2">
                 <Calculator className="w-4 h-4" />
                 Interaktiver Paket-Kalkulator
               </div>
@@ -193,7 +193,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                       onClick={() => setSelectedPillar(p)}
                       className={`min-h-[44px] py-3 px-4 rounded-none text-xs font-bold transition-all cursor-pointer active:scale-[0.98] ${
                         selectedPillar === p
-                          ? 'bg-[#3D6B8C] text-white'
+                          ? 'bg-accent text-white'
                           : 'bg-[#0F0F0F] border border-[#222222] text-gray-300 hover:bg-white/10'
                       }`}
                     >
@@ -214,7 +214,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                       onClick={() => setSelectedTier(t)}
                       className={`min-h-[44px] py-3 px-4 rounded-none text-xs font-bold transition-all cursor-pointer active:scale-[0.98] ${
                         selectedTier === t
-                          ? 'bg-[#3D6B8C] text-white'
+                          ? 'bg-accent text-white'
                           : 'bg-[#0F0F0F] border border-[#222222] text-gray-300 hover:bg-white/10'
                       }`}
                     >
@@ -229,7 +229,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                   <label className="font-semibold uppercase tracking-wider text-gray-300">
                     3. Recovery-Sessions (+70 € / Session)
                   </label>
-                  <span className="font-mono text-[#3D6B8C] font-bold tabular-nums">
+                  <span className="font-mono text-accent font-bold tabular-nums">
                     {addRecoverySessions} Sessions (+{recoveryCost} €)
                   </span>
                 </div>
@@ -240,7 +240,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                       onClick={() => setAddRecoverySessions(count)}
                       className={`flex-1 py-2 rounded-none text-xs font-medium border transition-all cursor-pointer active:scale-[0.98] ${
                         addRecoverySessions === count
-                          ? 'bg-[#3D6B8C]/20 border-[#3D6B8C] text-[#3D6B8C]'
+                          ? 'bg-accent/20 border-accent text-accent'
                           : 'bg-[#0F0F0F] border-[#222222] text-gray-400 hover:border-white/20'
                       }`}
                     >
@@ -255,7 +255,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                   type="checkbox"
                   checked={includeNutrition}
                   onChange={(e) => setIncludeNutrition(e.target.checked)}
-                  className="rounded-none border-[#222222] bg-[#151515] text-[#3D6B8C]"
+                  className="rounded-none border-[#222222] bg-[#151515] text-accent"
                 />
                 <div className="text-xs">
                   <span className="font-semibold text-white block">Maßgeschneiderter Ernährungsplan (+80 €)</span>
@@ -290,7 +290,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
 
               <div className="pt-4 border-t border-white/10 space-y-1">
                 <div className="text-xs text-muted uppercase tracking-widest">Gesamtpreis:</div>
-                <div className="font-display text-4xl font-normal text-[#3D6B8C] tabular-nums">
+                <div className="font-display text-4xl font-normal text-accent tabular-nums">
                   {calculatedTotal} €
                 </div>
                 <div className="text-[11px] text-muted">{STUDIO_INFO.pAngvTaxNote}</div>
@@ -304,7 +304,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
                     customSummaryText
                   )
                 }
-                className="w-full bg-[#3D6B8C] hover:bg-[#5289AD] text-white py-3.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+                className="w-full bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
               >
                 <span>Dieses Wunschpaket anfragen</span>
                 <ArrowRight className="w-4 h-4" />
@@ -325,7 +325,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
               <details key={item.question} className="glass-panel p-5 group">
                 <summary className="font-display text-base text-white cursor-pointer list-none flex justify-between gap-4">
                   {item.question}
-                  <span className="text-[#3D6B8C] text-xs shrink-0">+</span>
+                  <span className="text-accent text-xs shrink-0">+</span>
                 </summary>
                 <p className="text-sm text-muted leading-relaxed mt-3 pt-3 border-t border-[#222222]">
                   {item.answer}

@@ -43,8 +43,8 @@ export const FormPage: React.FC<FormPageProps> = ({ onOpenBooking }) => {
               { num: '02', title: 'Stabilität', desc: 'Gezieltes Rumpf- und Gelenktraining für eine aufrechte Haltung und Schmerzfreiheit im Sitz- oder Stehalltag.', icon: Scale },
               { num: '03', title: 'Leistungsfähigkeit', desc: 'Ganzheitliche Athletik zur Verbesserung von Ausdauer, Beweglichkeit und körperlichen Belastungsreserven.', icon: Activity },
             ].map((item) => (
-              <div key={item.num} className="p-8 glass-panel space-y-4 hover:border-[#3D6B8C]/30 transition-all">
-                <div className="flex items-center justify-between text-[#3D6B8C]">
+              <div key={item.num} className="p-8 glass-panel space-y-4 hover:border-accent/30 transition-all">
+                <div className="flex items-center justify-between text-accent">
                   <item.icon className="w-6 h-6" />
                   <span className="font-mono text-xs font-bold">{item.num}</span>
                 </div>
@@ -107,8 +107,8 @@ export const FormPage: React.FC<FormPageProps> = ({ onOpenBooking }) => {
               { title: 'Strength Training', desc: 'Gezielte Hypertrophie und Maximalkraftsteigerung mit progressiver Belastungssteuerung.' },
               { title: 'Mobility Training', desc: 'Gezielte Erweiterung des schmerzfreien Bewegungsausmaßes aller Hauptgelenke.' },
             ].map((m) => (
-              <div key={m.title} className="p-6 glass-panel space-y-2 hover:border-[#3D6B8C]/30 transition-all">
-                <h3 className="font-display text-lg text-[#3D6B8C] font-normal uppercase">{m.title}</h3>
+              <div key={m.title} className="p-6 glass-panel space-y-2 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg text-accent font-normal uppercase">{m.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{m.desc}</p>
               </div>
             ))}

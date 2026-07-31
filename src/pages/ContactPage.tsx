@@ -103,7 +103,7 @@ export const ContactPage: React.FC = () => {
               { step: '03', title: 'Durchstarten', desc: 'Start deines maßgeschneiderten Personal Trainings & Recovery-Programms.' },
             ].map((s) => (
               <div key={s.step} className="timeline-step p-6 bg-[#0F0F0F]/80 border border-[#222222] space-y-3">
-                <div className="font-mono text-xs font-bold text-[#3D6B8C]">SCHRITT {s.step}</div>
+                <div className="font-mono text-xs font-bold text-accent">SCHRITT {s.step}</div>
                 <h3 className="font-display text-lg text-white font-normal uppercase">{s.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{s.desc}</p>
               </div>
@@ -126,7 +126,7 @@ export const ContactPage: React.FC = () => {
 
             <div className="space-y-4 text-xs text-muted">
               <div className="flex items-start gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222]">
-                <MapPin className="w-4 h-4 text-[#3D6B8C] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white block mb-0.5">Adresse</span>
                   <span>{STUDIO_INFO.locationName}, {STUDIO_INFO.cityPostal}</span>
@@ -135,17 +135,17 @@ export const ContactPage: React.FC = () => {
               </div>
 
               <div className="flex items-start gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222]">
-                <Mail className="w-4 h-4 text-[#3D6B8C] shrink-0 mt-0.5" />
+                <Mail className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white block mb-0.5">E-Mail</span>
-                  <a href={`mailto:${STUDIO_INFO.email}`} className="text-[#3D6B8C] hover:underline">
+                  <a href={`mailto:${STUDIO_INFO.email}`} className="text-accent hover:underline">
                     {STUDIO_INFO.email}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222]">
-                <Globe className="w-4 h-4 text-[#3D6B8C] shrink-0 mt-0.5" />
+                <Globe className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white block mb-0.5">Webseite</span>
                   <span>{STUDIO_INFO.domain}</span>
@@ -155,7 +155,7 @@ export const ContactPage: React.FC = () => {
           </GlassPanel>
 
           <GlassPanel className="p-6 space-y-4 text-center">
-            <div className="flex items-center justify-center gap-2 text-[#3D6B8C] text-xs font-semibold">
+            <div className="flex items-center justify-center gap-2 text-accent text-xs font-semibold">
               <Navigation className="w-4 h-4" />
               <span>Interaktive Karte (DSGVO-konform)</span>
             </div>
@@ -167,7 +167,7 @@ export const ContactPage: React.FC = () => {
                 </p>
                 <button
                   onClick={handleLoadMap}
-                  className="px-5 py-2.5 rounded-none bg-[#3D6B8C]/20 hover:bg-[#3D6B8C] border border-[#3D6B8C] text-[#3D6B8C] hover:text-white text-xs font-bold transition-all cursor-pointer active:scale-[0.98]"
+                  className="px-5 py-2.5 rounded-none bg-accent/20 hover:bg-accent border border-accent text-accent hover:text-white text-xs font-bold transition-all cursor-pointer active:scale-[0.98]"
                 >
                   Karte jetzt laden
                 </button>
@@ -198,7 +198,7 @@ export const ContactPage: React.FC = () => {
 
           {formSubmitted ? (
             <div className="p-8 text-center space-y-4 bg-[#0F0F0F] border border-[#222222]">
-              <CheckCircle2 className="w-12 h-12 text-[#3D6B8C] mx-auto" />
+              <CheckCircle2 className="w-12 h-12 text-accent mx-auto" />
               <h3 className="font-display text-xl font-normal text-white uppercase">
                 Vielen Dank, {formData.name}!
               </h3>
@@ -229,7 +229,7 @@ export const ContactPage: React.FC = () => {
                     placeholder="Dein Name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C]"
+                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent"
                   />
                 </div>
                 <div className="space-y-2">
@@ -242,7 +242,7 @@ export const ContactPage: React.FC = () => {
                     placeholder="deine@email.de"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C]"
+                    className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent"
                   />
                 </div>
               </div>
@@ -254,7 +254,7 @@ export const ContactPage: React.FC = () => {
                 <select
                   value={formData.interest}
                   onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#3D6B8C]"
+                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accent"
                 >
                   <option value="FLOW">Säule 01: FLOW (Boxen & Kickboxen)</option>
                   <option value="FORM">Säule 02: FORM (Kraft & Athletik)</option>
@@ -273,7 +273,7 @@ export const ContactPage: React.FC = () => {
                   placeholder="Deine Ziele, Fragen oder Wunschzeiten..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] resize-none"
+                  className="w-full bg-[#0F0F0F] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent resize-none"
                 />
               </div>
 
@@ -283,7 +283,7 @@ export const ContactPage: React.FC = () => {
                     type="checkbox"
                     checked={formData.privacy}
                     onChange={(e) => setFormData({ ...formData, privacy: e.target.checked })}
-                    className="mt-1 rounded-none border-[#222222] bg-[#0F0F0F] text-[#3D6B8C]"
+                    className="mt-1 rounded-none border-[#222222] bg-[#0F0F0F] text-accent"
                   />
                   <span className="text-xs text-muted">
                     Ich stimme der Datenverarbeitung gemäß der Datenschutzerklärung zu.
@@ -300,7 +300,7 @@ export const ContactPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                  className="w-full min-h-[44px] bg-[#3D6B8C] hover:bg-[#5289AD] text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] disabled:opacity-50"
+                  className="w-full min-h-[44px] bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] disabled:opacity-50"
               >
                 <span>{loading ? 'Wird gesendet...' : 'Jetzt Erstgespräch anfragen'}</span>
                 <ArrowRight className="w-4 h-4" />

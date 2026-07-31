@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({
               <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
                 <Logo className="h-10 sm:h-11" />
               </Link>
-              <p className="text-[10px] tracking-[0.25em] text-[#3D6B8C] uppercase font-body font-medium">
+              <p className="text-[10px] tracking-[0.25em] text-accent uppercase font-body font-medium">
                 Premium Personal Training Hamburg
               </p>
             </div>
@@ -33,12 +33,12 @@ export const Footer: React.FC<FooterProps> = ({
 
             <div className="space-y-2 text-xs text-muted">
               <div className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-[#3D6B8C] shrink-0" />
+                <MapPin className="w-4 h-4 text-accent shrink-0" />
                 <span>{STUDIO_INFO.locationName}, {STUDIO_INFO.cityPostal}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#3D6B8C] shrink-0" />
-                <a href={`mailto:${STUDIO_INFO.email}`} className="hover:text-[#3D6B8C] transition-colors">
+                <Mail className="w-4 h-4 text-accent shrink-0" />
+                <a href={`mailto:${STUDIO_INFO.email}`} className="hover:text-accent transition-colors">
                   {STUDIO_INFO.email}
                 </a>
               </div>
@@ -49,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({
                 href="https://www.instagram.com/nataliezimmermann_ger/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 glass-panel flex items-center justify-center text-[#A0A0A0] hover:text-[#3D6B8C] hover:border-[#3D6B8C] transition-all"
+                className="w-9 h-9 glass-panel flex items-center justify-center text-[#A0A0A0] hover:text-accent hover:border-accent transition-all"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -58,7 +58,7 @@ export const Footer: React.FC<FooterProps> = ({
                 href={`https://wa.me/?text=${encodeURIComponent('Anfrage zu body & mind Hamburg')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 glass-panel flex items-center justify-center text-[#A0A0A0] hover:text-[#3D6B8C] hover:border-[#3D6B8C] transition-all"
+                className="w-9 h-9 glass-panel flex items-center justify-center text-[#A0A0A0] hover:text-accent hover:border-accent transition-all"
                 aria-label="WhatsApp Contact"
               >
                 <MessageCircle className="w-4 h-4" />
@@ -67,18 +67,18 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           <div className="lg:col-span-4 space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#3D6B8C]">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
               Navigation
             </h3>
             <ul className="grid grid-cols-2 gap-2 text-xs uppercase tracking-wider font-body">
               <li>
-                <Link to="/" className="hover:text-[#3D6B8C] transition-colors py-1 block">
+                <Link to="/" className="hover:text-accent transition-colors py-1 block">
                   Startseite
                 </Link>
               </li>
               {NAV_ITEMS.map((item) => (
                 <li key={item.id}>
-                  <Link to={item.path} className="hover:text-[#3D6B8C] transition-colors py-1 block">
+                  <Link to={item.path} className="hover:text-accent transition-colors py-1 block">
                     {item.label}
                   </Link>
                 </li>
@@ -88,7 +88,7 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="pt-2">
               <button
                 onClick={onOpenBooking}
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#3D6B8C] hover:text-white transition-colors border-b border-[#3D6B8C]/40 pb-0.5 cursor-pointer"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent hover:text-white transition-colors border-b border-accent/40 pb-0.5 cursor-pointer"
               >
                 <span>Erstgespräch anfragen</span>
                 <span>→</span>
@@ -97,7 +97,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#3D6B8C]">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
               Rechtliches
             </h3>
             <ul className="space-y-2 text-xs uppercase tracking-wider text-muted font-body">
@@ -126,7 +126,7 @@ export const Footer: React.FC<FooterProps> = ({
 
         <div className="mt-8 space-y-4">
           <div className="p-4 glass-panel text-xs text-muted leading-relaxed flex items-start gap-3">
-            <Info className="w-4 h-4 text-[#3D6B8C] shrink-0 mt-0.5" />
+            <Info className="w-4 h-4 text-accent shrink-0 mt-0.5" />
             <div>
               <span className="text-white font-semibold block mb-0.5">Hinweis zu Recovery-Anwendungen (HWG):</span>
               {STUDIO_INFO.hwgRecoveryDisclaimer}
@@ -140,7 +140,7 @@ export const Footer: React.FC<FooterProps> = ({
                 href="https://nagacodex.cloud"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#777] hover:text-[#3D6B8C] transition-colors"
+                className="text-[#777] hover:text-accent transition-colors"
               >
                 Designed by Naga Codex
               </a>

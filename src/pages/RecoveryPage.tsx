@@ -54,23 +54,23 @@ export const RecoveryPage: React.FC<RecoveryPageProps> = ({ onOpenBooking }) => 
             {RECOVERY_MODULES.map((mod) => (
               <div
                 key={mod.id}
-                className="p-8 glass-panel hover:border-[#3D6B8C]/30 transition-all space-y-6 relative overflow-hidden flex flex-col justify-between"
+                className="p-8 glass-panel hover:border-accent/30 transition-all space-y-6 relative overflow-hidden flex flex-col justify-between"
               >
                 {mod.isNew && (
-                  <div className="absolute top-4 right-4 bg-[#3D6B8C] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 flex items-center gap-1">
+                  <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 flex items-center gap-1">
                     <Sparkles className="w-3 h-3" /> NEU
                   </div>
                 )}
 
                 <div className="space-y-3">
                   <h3 className="font-display text-2xl text-white font-normal uppercase">{mod.title}</h3>
-                  <div className="text-xs font-semibold text-[#3D6B8C]">{mod.tagline}</div>
+                  <div className="text-xs font-semibold text-accent">{mod.tagline}</div>
                   <p className="text-xs text-muted leading-relaxed">{mod.description}</p>
 
                   <div className="pt-3 space-y-1.5">
                     {mod.benefits.map((b, i) => (
                       <div key={i} className="flex items-center gap-2 text-xs text-muted">
-                        <Check className="w-3.5 h-3.5 text-[#3D6B8C] shrink-0" />
+                        <Check className="w-3.5 h-3.5 text-accent shrink-0" />
                         <span>{b}</span>
                       </div>
                     ))}
@@ -80,7 +80,7 @@ export const RecoveryPage: React.FC<RecoveryPageProps> = ({ onOpenBooking }) => 
                 <div className="pt-4 border-t border-white/10">
                   <button
                     onClick={() => onOpenBooking('RECOVERY', mod.title)}
-                    className="w-full bg-[#0F0F0F] border border-[#222222] hover:bg-[#3D6B8C] text-gray-200 hover:text-white py-3 rounded-none text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-[0.98]"
+                    className="w-full bg-[#0F0F0F] border border-[#222222] hover:bg-accent text-gray-200 hover:text-white py-3 rounded-none text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-[0.98]"
                   >
                     Anwendung Buchen / Anfragen
                   </button>
@@ -130,7 +130,7 @@ export const RecoveryPage: React.FC<RecoveryPageProps> = ({ onOpenBooking }) => 
               { step: 'SCHRITT 03', title: 'Erholt durchstarten', desc: 'Verlasse das Studio voller Energie, mit freiem Kopf und entspanntem Körper.' },
             ].map((s, i) => (
               <div key={i} className="timeline-step p-6 bg-[#0F0F0F]/80 border border-[#222222] space-y-3">
-                <div className="font-mono text-xs font-bold text-[#3D6B8C]">{s.step}</div>
+                <div className="font-mono text-xs font-bold text-accent">{s.step}</div>
                 <h3 className="font-display text-lg text-white font-normal uppercase">{s.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{s.desc}</p>
               </div>
@@ -141,7 +141,7 @@ export const RecoveryPage: React.FC<RecoveryPageProps> = ({ onOpenBooking }) => 
 
       <RevealOnScroll>
         <GlassPanel className="p-8 space-y-4">
-          <div className="flex items-center gap-2 text-[#3D6B8C]">
+          <div className="flex items-center gap-2 text-accent">
             <Info className="w-5 h-5 shrink-0" />
             <h3 className="text-sm font-bold uppercase tracking-wider">
               Gesamtes Recovery-Portfolio im Studio

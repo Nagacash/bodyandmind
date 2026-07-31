@@ -136,7 +136,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
 
         {showBadge && (
           <div className="absolute top-3 right-3 opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none">
-            <div className="glass-panel px-2.5 py-1 rounded-none text-[10px] font-mono tracking-wider flex items-center gap-1.5 text-[#3D6B8C]">
+            <div className="glass-panel px-2.5 py-1 rounded-none text-[10px] font-mono tracking-wider flex items-center gap-1.5 text-accent">
               <Camera className="w-3 h-3" />
               <span>{label}</span>
             </div>

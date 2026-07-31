@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accent: #3D6B8C;
-  --color-accent-hover: #5289AD;
-  --color-accent-light: #B8D4E8;
-  --color-accent-dark: #2A4D66;
+  --color-accent: #36beef;
+  --color-accent-hover: #5ecbf3;
+  --color-accent-light: #a8e4f8;
+  --color-accent-dark: #2a9fd4;
+  --color-brand-cyan: #36beef;
+  --color-brand-red: #e51842;
+  --color-brand-plum: #560d50;
   --color-bg: #0F0F0F;
   --color-surface: #151515;
   --color-surface-elevated: #1A1A1A;
@@ -60,10 +63,13 @@
     --color-surface: #151515;
     --color-surface-elevated: #1A1A1A;
     --color-border: #222222;
-    --color-accent: #3D6B8C;
-    --color-accent-hover: #5289AD;
-    --color-accent-light: #B8D4E8;
-    --color-accent-dark: #2A4D66;
+    --color-accent: #36beef;
+    --color-accent-hover: #5ecbf3;
+    --color-accent-light: #a8e4f8;
+    --color-accent-dark: #2a9fd4;
+    --color-brand-cyan: #36beef;
+    --color-brand-red: #e51842;
+    --color-brand-plum: #560d50;
     --color-text: #F5F5F5;
     --color-muted: #A0A0A0;
     --font-serif: 'Playfair Display', Georgia, Cambria, "Times New Roman", Times, serif;
@@ -174,7 +180,7 @@
   background: var(--color-surface-elevated);
   border-color: var(--color-accent);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -15px rgba(61, 107, 140, 0.12);
+  box-shadow: 0 20px 40px -15px rgba(54, 190, 239, 0.14);
 }
 
 /* Primary button tactile feedback */
@@ -205,7 +211,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(61, 107, 140, 0.08) 50%,
+    rgba(54, 190, 239, 0.1) 50%,
     transparent 100%
   );
   animation: shimmer 1.8s ease-in-out infinite;
@@ -223,14 +229,14 @@
 
 .accent-gradient-text,
 .gold-gradient-text {
-  background: linear-gradient(135deg, #6B9DC4 0%, #3D6B8C 50%, #2A4D66 100%);
+  background: linear-gradient(135deg, #36beef 0%, #e51842 50%, #560d50 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .accent-border,
 .gold-border {
-  border-color: rgba(61, 107, 140, 0.35);
+  border-color: rgba(54, 190, 239, 0.35);
 }
 
 .accent-bg,

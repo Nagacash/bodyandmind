@@ -116,7 +116,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             <h2 className="font-display text-xl sm:text-2xl font-normal text-white uppercase leading-tight">
               Erstgespräch vereinbaren
             </h2>
-            <p className="text-xs text-[#3D6B8C] mt-1 font-body">
+            <p className="text-xs text-accent mt-1 font-body">
               Kostenlos, unverbindlich & in Ruhe an der Rothenbaumchaussee
             </p>
           </div>
@@ -131,7 +131,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
 
         {submitted ? (
           <div className="overflow-y-auto flex-1 overscroll-contain p-6 sm:p-8 text-center space-y-6">
-            <div className="w-16 h-16 bg-[#3D6B8C]/15 border border-[#3D6B8C] rounded-none flex items-center justify-center mx-auto text-[#3D6B8C]">
+            <div className="w-16 h-16 bg-accent/15 border border-accent rounded-none flex items-center justify-center mx-auto text-accent">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div className="space-y-2">
@@ -144,7 +144,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             </div>
 
             <div className="p-4 rounded-none bg-[#151515] border border-[#222222] text-xs text-muted max-w-md mx-auto text-left space-y-1">
-              <div className="font-semibold text-[#3D6B8C]">Zusammenfassung deiner Anfrage:</div>
+              <div className="font-semibold text-accent">Zusammenfassung deiner Anfrage:</div>
               <div>• E-Mail: {formData.email}</div>
               <div>• Schwerpunkt: {formData.selectedOptionName || formData.pillar}</div>
               <div>• Wunschzeit: {formData.timePreference}</div>
@@ -155,7 +155,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
 
             <button
               onClick={onClose}
-              className="bg-[#3D6B8C] text-white px-8 py-3 rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[#5289AD] transition-colors cursor-pointer"
+              className="bg-accent text-white px-8 py-3 rounded-none font-bold uppercase tracking-wider text-xs hover:bg-accent-hover transition-colors cursor-pointer"
             >
               Schließen
             </button>
@@ -174,9 +174,9 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             />
             {/* Context Badge if preselected */}
             {(formData.selectedOptionName || formData.customPackageSummary) && (
-              <div className="p-3.5 rounded-none bg-[#3D6B8C]/10 border border-[#3D6B8C]/30 text-xs text-[#B8D4E8] flex items-center justify-between">
+              <div className="p-3.5 rounded-none bg-accent/10 border border-accent/30 text-xs text-[#B8D4E8] flex items-center justify-between">
                 <div>
-                  <span className="font-semibold text-[#3D6B8C] block mb-0.5">Ausgewählte Option:</span>
+                  <span className="font-semibold text-accent block mb-0.5">Ausgewählte Option:</span>
                   <span>{formData.customPackageSummary || formData.selectedOptionName}</span>
                 </div>
               </div>
@@ -201,7 +201,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                       onClick={() => setFormData({ ...formData, pillar: p.id as PillarType })}
                       className={`min-h-[44px] py-2.5 px-3 rounded-none text-xs font-medium border transition-all text-center ${
                         formData.pillar === p.id
-                          ? 'bg-[#3D6B8C]/20 border-[#3D6B8C] text-[#3D6B8C]'
+                          ? 'bg-accent/20 border-accent text-accent'
                           : 'bg-[#151515] border-[#222222] text-gray-300 hover:border-white/20'
                       }`}
                     >
@@ -224,7 +224,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                   placeholder="z.B. Alex Smith"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] transition-colors"
+                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -238,7 +238,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                   placeholder="deine@email.de"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] transition-colors"
+                  className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
             </div>
@@ -246,7 +246,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             {/* Time Preferences */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2 flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#3D6B8C]" />
+                <Clock className="w-3.5 h-3.5 text-accent" />
                 <span>Bevorzugte Tageszeit</span>
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -267,7 +267,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                     }
                     className={`min-h-[44px] py-2.5 px-2.5 rounded-none text-xs font-medium border transition-all text-center ${
                       formData.timePreference === t.id
-                        ? 'bg-[#3D6B8C]/20 border-[#3D6B8C] text-[#3D6B8C]'
+                        ? 'bg-accent/20 border-accent text-accent'
                         : 'bg-[#151515] border-[#222222] text-gray-400 hover:border-white/20'
                     }`}
                   >
@@ -280,7 +280,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             {/* Preferred Days */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2 flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#3D6B8C]" />
+                <Calendar className="w-3.5 h-3.5 text-accent" />
                 <span>Wunschtage (optional)</span>
               </label>
               <div className="flex flex-wrap gap-2">
@@ -293,7 +293,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                       onClick={() => handleDayToggle(day)}
                       className={`min-h-[44px] px-3 py-2.5 rounded-none text-xs font-medium border transition-all ${
                         selected
-                          ? 'bg-[#3D6B8C] text-white border-[#3D6B8C] font-bold'
+                          ? 'bg-accent text-white border-accent font-bold'
                           : 'bg-[#151515] border-[#222222] text-gray-400 hover:border-white/20'
                       }`}
                     >
@@ -314,7 +314,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                 placeholder="z.B. Stressabbau, Haltung, Vorbereitung auf Sommer, etc."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#3D6B8C] transition-colors resize-none"
+                className="w-full bg-[#151515] border border-[#222222] rounded-none px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors resize-none"
               />
             </div>
 
@@ -325,11 +325,11 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                   type="checkbox"
                   checked={formData.privacyConsent}
                   onChange={(e) => setFormData({ ...formData, privacyConsent: e.target.checked })}
-                  className="mt-1 rounded-none border-[#222222] bg-[#151515] text-[#3D6B8C] focus:ring-[#3D6B8C]"
+                  className="mt-1 rounded-none border-[#222222] bg-[#151515] text-accent focus:ring-accent"
                 />
                 <span className="text-xs text-muted leading-relaxed">
                   Ich stimme der Verarbeitung meiner Daten zur Kontaktaufnahme gemäß der{' '}
-                  <span className="text-[#3D6B8C] underline">Datenschutzerklärung</span> zu.
+                  <span className="text-accent underline">Datenschutzerklärung</span> zu.
                 </span>
               </label>
             </div>
@@ -345,7 +345,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#3D6B8C] hover:bg-[#5289AD] text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
+                className="w-full bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
               >
                 {loading ? (
                   <span>Wird gesendet...</span>
@@ -357,7 +357,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                 )}
               </button>
               <div className="text-center mt-3 text-[11px] text-muted flex items-center justify-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#3D6B8C]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-accent" />
                 <span>Geschützter Rahmen & absolute Diskretion</span>
               </div>
             </div>

@@ -46,7 +46,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onOpenBooking }) => {
                     <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
                       {member.name}
                     </h2>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#3D6B8C]">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-accent">
                       {member.role}
                     </p>
                     <p className="text-sm text-muted leading-relaxed font-light">

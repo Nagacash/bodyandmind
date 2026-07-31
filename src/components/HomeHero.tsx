@@ -34,7 +34,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <StaggerContainer className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8">
           <StaggerItem>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 glass-panel text-xs font-semibold tracking-[0.3em] text-[#3D6B8C] uppercase">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 glass-panel text-xs font-semibold tracking-[0.3em] text-accent uppercase">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Rothenbaumchaussee 156 • Hamburg</span>
             </div>
@@ -49,7 +49,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => {
           </StaggerItem>
 
           <StaggerItem>
-            <h2 className="font-display text-xl sm:text-2xl text-[#3D6B8C] font-normal italic">
+            <h2 className="font-display text-xl sm:text-2xl text-accent font-normal italic">
               Boxen · Kickboxen · Recovery · Erholung
             </h2>
           </StaggerItem>
@@ -82,13 +82,13 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => {
           <StaggerItem>
             <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-muted border-t border-[#222222] max-w-xl mx-auto uppercase tracking-wider font-body">
               <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#3D6B8C]" /> Absolute Diskretion
+                <Check className="w-3.5 h-3.5 text-accent" /> Absolute Diskretion
               </span>
               <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#3D6B8C]" /> 1:1 Betreuung
+                <Check className="w-3.5 h-3.5 text-accent" /> 1:1 Betreuung
               </span>
               <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#3D6B8C]" /> Transparente Preise
+                <Check className="w-3.5 h-3.5 text-accent" /> Transparente Preise
               </span>
             </div>
           </StaggerItem>
