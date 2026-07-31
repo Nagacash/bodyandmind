@@ -250,6 +250,31 @@
   padding-left: 1rem;
 }
 
+/* Logo palette as thin top edge (cyan · red · plum) */
+.brand-trio-top {
+  position: relative;
+}
+
+.brand-trio-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-brand-cyan) 0%,
+    var(--color-brand-cyan) 33.33%,
+    var(--color-brand-red) 33.33%,
+    var(--color-brand-red) 66.66%,
+    var(--color-brand-plum) 66.66%,
+    var(--color-brand-plum) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* Timeline connector */
 .timeline-step {
   position: relative;

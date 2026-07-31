@@ -167,7 +167,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenBooking }) => {
       </RevealOnScroll>
 
       <RevealOnScroll>
-        <GlassPanel accent className="p-8 sm:p-12 space-y-8">
+        <GlassPanel accent brandTrioTop className="p-8 sm:p-12 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
             <div className="space-y-1">
               <div className="text-xs font-bold uppercase tracking-[0.3em] text-accent flex items-center gap-2">

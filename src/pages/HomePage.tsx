@@ -24,7 +24,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
       <div className="space-y-16 sm:space-y-24 lg:space-y-32 pb-16 sm:pb-20">
         {/* Intro Section */}
         <RevealOnScroll>
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+          <section className="max-w-4xl mx-auto px-4 sm:px-6 space-y-6 border-l-2 border-brand-plum/40 pl-5 sm:pl-8">
             <SectionLabel>Premium Privattraining Hamburg</SectionLabel>
             <h2 className="font-display text-2xl sm:text-4xl text-white font-normal uppercase leading-tight max-w-[65ch]">
               Boxen, Kickboxen, Kraft & Recovery – privat statt Massenfitness.
@@ -38,7 +38,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
         {/* Summer Special */}
         <RevealOnScroll>
           <section className="max-w-6xl mx-auto px-4 sm:px-6">
-            <GlassPanel accent className="relative p-8 sm:p-12 overflow-hidden">
+            <GlassPanel accent brandTrioTop className="relative p-8 sm:p-12 overflow-hidden">
               <div className="absolute top-0 right-0 bg-accent text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 rounded-bl-2xl flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>{SUMMER_SPECIAL.badge}</span>
@@ -56,10 +56,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                  {SUMMER_SPECIAL.options.map((opt) => (
+                  {SUMMER_SPECIAL.options.map((opt, optIdx) => (
                     <div
                       key={opt.id}
-                      className="p-6 bg-[#0F0F0F]/80 border border-[#222222] hover:border-accent transition-all space-y-4 flex flex-col justify-between"
+                      className={`p-6 bg-[#0F0F0F]/80 border border-[#222222] transition-all space-y-4 flex flex-col justify-between border-l-2 ${
+                        optIdx === 0
+                          ? 'border-l-brand-cyan/55 hover:border-brand-cyan/70'
+                          : 'border-l-brand-red/55 hover:border-brand-red/70'
+                      }`}
                     >
                       <div className="space-y-3">
                         <h3 className="font-display text-lg text-white font-normal uppercase">
@@ -98,7 +102,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
         {/* About Teaser */}
         <RevealOnScroll>
           <section className="max-w-6xl mx-auto px-4 sm:px-6">
-            <GlassPanel className="p-8 sm:p-12 grid grid-cols-1 md:grid-cols-12 items-center gap-8">
+            <GlassPanel brandTrioTop className="p-8 sm:p-12 grid grid-cols-1 md:grid-cols-12 items-center gap-8 border-brand-plum/25">
               <div className="md:col-span-5">
                 <ImagePlaceholder
                   src={FOUNDER_IMAGE}
@@ -136,10 +140,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {TESTIMONIALS.map((item, idx) => (
+              {TESTIMONIALS.map((item, idx) => {
+                const topBorder =
+                  idx === 0
+                    ? 'border-t-2 border-t-brand-cyan/45'
+                    : idx === 1
+                      ? 'border-t-2 border-t-brand-red/45'
+                      : 'border-t-2 border-t-brand-plum/45';
+
+                return (
                 <div
                   key={idx}
-                  className="p-6 glass-panel space-y-4 flex flex-col justify-between hover:border-accent/30 transition-all"
+                  className={`p-6 glass-panel space-y-4 flex flex-col justify-between hover:border-accent/30 transition-all ${topBorder}`}
                 >
                   <p className="text-xs sm:text-sm text-muted italic leading-relaxed font-body">
                     &ldquo;{item.quote}&rdquo;
@@ -150,7 +162,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
                     <div className="text-[10px] text-muted">{item.location}</div>
                   </div>
                 </div>
-              ))}
+              );
+              })}
             </div>
           </section>
         </RevealOnScroll>
@@ -158,7 +171,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
         {/* CTA Banner */}
         <RevealOnScroll>
           <section className="max-w-5xl mx-auto px-4 sm:px-6">
-            <GlassPanel accent className="p-10 sm:p-14 text-center space-y-8">
+            <GlassPanel accent brandTrioTop className="p-10 sm:p-14 text-center space-y-8">
               <div className="space-y-3 max-w-2xl mx-auto">
                 <h2 className="font-display text-3xl sm:text-4xl text-white font-normal uppercase">
                   Lernen wir uns kennen.

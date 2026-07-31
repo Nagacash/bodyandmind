@@ -121,7 +121,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
       </RevealOnScroll>
 
       <RevealOnScroll>
-        <GlassPanel accent className="p-8 sm:p-12 space-y-6">
+        <GlassPanel accent brandTrioTop className="p-8 sm:p-12 space-y-6">
           <div className="max-w-2xl space-y-4">
             <SectionLabel>Gründerin & Vision</SectionLabel>
             <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">

@@ -15,7 +15,7 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({
   buttonLabel,
   onClick,
 }) => (
-  <GlassPanel accent className="p-10 sm:p-14 text-center space-y-6">
+  <GlassPanel accent brandTrioTop className="p-10 sm:p-14 text-center space-y-6">
     <div className="space-y-3 max-w-2xl mx-auto">
       <h2 className="font-display text-2xl sm:text-3xl text-white font-normal uppercase">
         {title}

@@ -14,7 +14,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenBooking,
 }) => {
   return (
-    <footer className="bg-[#0A0A0A] border-t border-white/10 text-[#A0A0A0] pt-16 pb-12 font-body relative z-10">
+    <footer className="bg-[#0A0A0A] brand-trio-top text-[#A0A0A0] pt-16 pb-12 font-body relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/10">
           <div className="lg:col-span-5 space-y-5">
