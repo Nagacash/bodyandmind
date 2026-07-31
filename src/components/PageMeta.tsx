@@ -88,6 +88,7 @@ export function SiteStructuredData() {
         name: STUDIO_INFO.brandName,
         url: SITE_URL,
         email: STUDIO_INFO.email,
+        telephone: STUDIO_INFO.phoneTel,
         description: homeSeo.answerLead ?? homeSeo.description,
         knowsAbout: [...SEO_KEYWORDS],
         address: {
@@ -107,7 +108,7 @@ export function SiteStructuredData() {
         '@type': 'Person',
         '@id': `${SITE_URL}/#founder`,
         name: 'Natalie Zimmermann',
-        jobTitle: 'Personal Trainerin & Head Coach',
+        jobTitle: 'Box-Weltmeisterin, Speakerin & Mental Coach',
         worksFor: { '@id': `${SITE_URL}/#business` },
       },
     ],

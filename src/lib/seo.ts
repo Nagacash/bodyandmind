@@ -36,9 +36,8 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title:
       'Premium Privattraining Hamburg – Boxen, Kickboxen & Recovery | body & mind',
     description:
-      'Premium Privattraining in Hamburg-Rotherbaum: Boxen, Kickboxen, Krafttraining und Recovery für Erholung & Stressabbau – 1:1, diskret, ohne Massenstudio.',
-    answerLead:
-      'body & mind ist dein Premium-Studio für Privattraining in Hamburg: Boxen, Kickboxen, Kraft & Athletik sowie Recovery und Erholung – persönlich, 1:1 und ohne Gruppenkurse an der Rothenbaumchaussee 156.',
+      'Box-Weltmeisterin Natalie Zimmermann in Hamburg: Privattraining, Mental Coaching, Boxen, Kickboxen, Kraft & Recovery — körperliche Stärke und mentale Resilienz an der Rothenbaumchaussee.',
+    answerLead: STUDIO_INFO.tagline,
     keywords:
       'Privattraining Hamburg, Boxen Hamburg, Kickboxen Hamburg, Premium Personal Training, Recovery Hamburg, Erholung',
   },
@@ -105,9 +104,9 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title:
       'Kontakt – Privattraining & Erstgespräch Hamburg | body & mind',
     description:
-      'Erstgespräch für Premium Privattraining, Boxen, Kickboxen oder Recovery in Hamburg-Rotherbaum. Rothenbaumchaussee 156, 20149 Hamburg.',
+      'Erstgespräch mit Natalie Zimmermann in Hamburg-Rotherbaum. Rothenbaumchaussee 156, 20149 Hamburg · 040 / 53790578 · info@nataliezimmermann.de',
     answerLead:
-      'Kontaktiere body & mind für Premium Privattraining, Boxen, Kickboxen oder Recovery & Erholung – Erstgespräch im Studio Rothenbaumchaussee 156 in Hamburg.',
+      'Kontaktiere body & mind per E-Mail, Telefon oder WhatsApp — Erstgespräch im Studio Rothenbaumchaussee 156, 20149 Hamburg.',
     keywords:
       'Privattraining Hamburg Kontakt, Boxen Hamburg anfragen, Recovery Hamburg Termin',
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { STUDIO_INFO, NAV_ITEMS } from '../data/studioData';
-import { MapPin, Mail, Instagram, MessageCircle, Info, ExternalLink } from 'lucide-react';
+import { MapPin, Mail, Instagram, MessageCircle, Info, ExternalLink, Phone } from 'lucide-react';
 import { Logo } from './Logo';
 
 interface FooterProps {
@@ -28,13 +28,19 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-sm text-muted max-w-sm leading-relaxed font-body">
-              Ein privates Studio für Bewegung, Regeneration und innere Balance an der Rothenbaumchaussee.
+              {STUDIO_INFO.tagline}
             </p>
 
             <div className="space-y-2 text-xs text-muted">
               <div className="flex items-center gap-2.5">
                 <MapPin className="w-4 h-4 text-accent shrink-0" />
                 <span>{STUDIO_INFO.locationName}, {STUDIO_INFO.cityPostal}</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-accent shrink-0" />
+                <a href={`tel:${STUDIO_INFO.phoneTel}`} className="hover:text-accent transition-colors">
+                  {STUDIO_INFO.phoneDisplay}
+                </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-accent shrink-0" />
@@ -55,7 +61,11 @@ export const Footer: React.FC<FooterProps> = ({
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href={`https://wa.me/?text=${encodeURIComponent('Anfrage zu body & mind Hamburg')}`}
+                href={
+                  STUDIO_INFO.whatsappPhone
+                    ? `https://wa.me/${STUDIO_INFO.whatsappPhone.replace(/\D/g, '')}?text=${encodeURIComponent('Anfrage zu body & mind Hamburg')}`
+                    : `https://wa.me/?text=${encodeURIComponent('Anfrage zu body & mind Hamburg')}`
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 glass-panel flex items-center justify-center text-[#A0A0A0] hover:text-accent hover:border-accent transition-all"

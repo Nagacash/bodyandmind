@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { BookingData, PillarType } from '../types';
-import { submitInquiry } from '../lib/submitInquiry';
-import { X, CheckCircle2, ShieldCheck, Clock, Calendar, Send } from 'lucide-react';
+import {
+  openInquiryViaEmail,
+  openInquiryViaWhatsApp,
+  type InquiryPayload,
+} from '../lib/inquiryContact';
+import { X, CheckCircle2, ShieldCheck, Clock, Calendar, Mail, MessageCircle } from 'lucide-react';
 
 interface ErstgespraechModalProps {
   isOpen: boolean;
@@ -31,7 +35,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [sentVia, setSentVia] = useState<'email' | 'whatsapp' | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [honeypot, setHoneypot] = useState('');
 
@@ -44,6 +48,7 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
         customPackageSummary: customPackageSummary || prev.customPackageSummary,
       }));
       setSubmitted(false);
+      setSentVia(null);
       setErrorMessage('');
       setHoneypot('');
     }
@@ -51,50 +56,47 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage('');
-
+  const buildPayload = (): InquiryPayload | null => {
     if (!formData.name.trim() || !formData.email.trim()) {
       setErrorMessage('Bitte fülle alle Pflichtfelder (Name & E-Mail) aus.');
-      return;
+      return null;
     }
 
     if (!formData.privacyConsent) {
       setErrorMessage('Bitte bestätige die Datenschutzerklärung.');
-      return;
+      return null;
     }
 
     if (honeypot) {
-      return;
+      return null;
     }
 
-    setLoading(true);
+    setErrorMessage('');
+    return {
+      source: 'booking',
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      privacyConsent: true,
+      pillar: formData.pillar,
+      selectedOptionName: formData.selectedOptionName,
+      timePreference: formData.timePreference,
+      preferredDays: formData.preferredDays,
+      notes: formData.notes,
+      customPackageSummary: formData.customPackageSummary,
+    };
+  };
 
-    try {
-      await submitInquiry(
-        {
-          source: 'booking',
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          privacyConsent: true,
-          pillar: formData.pillar,
-          selectedOptionName: formData.selectedOptionName,
-          timePreference: formData.timePreference,
-          preferredDays: formData.preferredDays,
-          notes: formData.notes,
-          customPackageSummary: formData.customPackageSummary,
-        },
-        honeypot
-      );
-      setSubmitted(true);
-    } catch (err) {
-      setErrorMessage(
-        err instanceof Error ? err.message : 'Anfrage konnte nicht gesendet werden.'
-      );
-    } finally {
-      setLoading(false);
+  const handleSend = (channel: 'email' | 'whatsapp') => {
+    const payload = buildPayload();
+    if (!payload) return;
+
+    if (channel === 'email') {
+      openInquiryViaEmail(payload);
+    } else {
+      openInquiryViaWhatsApp(payload);
     }
+    setSentVia(channel);
+    setSubmitted(true);
   };
 
   const handleDayToggle = (day: string) => {
@@ -139,7 +141,9 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
                 Vielen Dank, {formData.name}!
               </h3>
               <p className="text-sm text-muted max-w-md mx-auto leading-relaxed">
-                Deine Anfrage für ein Erstgespräch ist erfolgreich eingegangen. Wir melden uns innerhalb von 24 Stunden persönlich bei dir.
+                {sentVia === 'whatsapp'
+                  ? 'WhatsApp sollte sich geöffnet haben — sende die Nachricht ab, damit wir deine Anfrage erhalten.'
+                  : 'Dein E-Mail-Programm sollte sich geöffnet haben — sende die Nachricht ab, damit wir deine Anfrage erhalten.'}
               </p>
             </div>
 
@@ -161,7 +165,13 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="overflow-y-auto flex-1 overscroll-contain p-4 sm:p-8 space-y-6">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSend('email');
+            }}
+            className="overflow-y-auto flex-1 overscroll-contain p-4 sm:p-8 space-y-6"
+          >
             <input
               type="text"
               name="_gotcha"
@@ -340,23 +350,25 @@ export const ErstgespraechModal: React.FC<ErstgespraechModalProps> = ({
               </div>
             )}
 
-            {/* Submit Button */}
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
-              >
-                {loading ? (
-                  <span>Wird gesendet...</span>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" />
-                    <span>Erstgespräch verbindlich anfragen</span>
-                  </>
-                )}
-              </button>
-              <div className="text-center mt-3 text-[11px] text-muted flex items-center justify-center gap-1">
+            <div className="pt-2 space-y-3">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="submit"
+                  className="flex-1 bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Per E-Mail senden</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend('whatsapp')}
+                  className="flex-1 bg-[#151515] hover:bg-[#1a1a1a] border border-[#222222] hover:border-accent/50 text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <MessageCircle className="w-4 h-4 text-accent" />
+                  <span>Per WhatsApp</span>
+                </button>
+              </div>
+              <div className="text-center text-[11px] text-muted flex items-center justify-center gap-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-accent" />
                 <span>Geschützter Rahmen & absolute Diskretion</span>
               </div>

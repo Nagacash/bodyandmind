@@ -23,19 +23,13 @@ bun install
 # or: npm install
 ```
 
-2. Create `.env` from `.env.example` and add your Resend API key:
-
-```bash
-cp .env.example .env
-```
-
-3. Start the dev server (Vite + API):
+2. Start the dev server (Vite + API):
 
 ```bash
 bun run dev
 ```
 
-Forms on **Kontakt** and **Erstgespräch** send inquiries to `INQUIRY_TO_EMAIL` via Resend.
+**Kontakt** and **Erstgespräch** open a pre-filled e-mail to `info@nataliezimmermann.de` or WhatsApp — no third-party mail API required.
 
 Run tests:
 
@@ -50,7 +44,7 @@ bun run build
 NODE_ENV=production bun run start
 ```
 
-Serves the built site and `/api/inquiry` from port 3001 (or `PORT` env).
+Serves the built site from port 3001 (or `PORT` env). Optional `.env` only sets `PORT`.
 
 ## Project Structure
 

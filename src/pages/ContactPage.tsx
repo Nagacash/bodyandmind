@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { STUDIO_INFO } from '../data/studioData';
-import { MapPin, Mail, Globe, ArrowRight, CheckCircle2, Navigation } from 'lucide-react';
+import { MapPin, Mail, Globe, CheckCircle2, Navigation, MessageCircle, Phone } from 'lucide-react';
 import { PageHero } from '../components/ui/PageHero';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { GlassPanel } from '../components/ui/GlassPanel';
 import { RevealOnScroll } from '../components/ui/RevealOnScroll';
 import { hasMarketingConsent } from '../utils/cookieConsent';
-import { submitInquiry } from '../lib/submitInquiry';
+import {
+  openInquiryViaEmail,
+  openInquiryViaWhatsApp,
+  type InquiryPayload,
+} from '../lib/inquiryContact';
 
 const CONTACT_HERO_IMAGE = '/images/insta3.webp';
 
@@ -22,7 +26,7 @@ export const ContactPage: React.FC = () => {
     privacy: false,
   });
   const [errorMsg, setErrorMsg] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [sentVia, setSentVia] = useState<'email' | 'whatsapp' | null>(null);
   const [honeypot, setHoneypot] = useState('');
 
   useEffect(() => {
@@ -35,46 +39,43 @@ export const ContactPage: React.FC = () => {
     setMapConsent(true);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMsg('');
-
+  const buildPayload = (): InquiryPayload | null => {
     if (!formData.name.trim() || !formData.email.trim()) {
       setErrorMsg('Bitte Name und E-Mail eingeben.');
-      return;
+      return null;
     }
 
     if (!formData.privacy) {
       setErrorMsg('Bitte stimme der Datenschutzerklärung zu.');
-      return;
+      return null;
     }
 
     if (honeypot) {
-      return;
+      return null;
     }
 
-    setLoading(true);
+    setErrorMsg('');
+    return {
+      source: 'contact',
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      privacyConsent: true,
+      interest: formData.interest,
+      message: formData.message,
+    };
+  };
 
-    try {
-      await submitInquiry(
-        {
-          source: 'contact',
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          privacyConsent: true,
-          interest: formData.interest,
-          message: formData.message,
-        },
-        honeypot
-      );
-      setFormSubmitted(true);
-    } catch (err) {
-      setErrorMsg(
-        err instanceof Error ? err.message : 'Anfrage konnte nicht gesendet werden.'
-      );
-    } finally {
-      setLoading(false);
+  const handleSend = (channel: 'email' | 'whatsapp') => {
+    const payload = buildPayload();
+    if (!payload) return;
+
+    if (channel === 'email') {
+      openInquiryViaEmail(payload);
+    } else {
+      openInquiryViaWhatsApp(payload);
     }
+    setSentVia(channel);
+    setFormSubmitted(true);
   };
 
   return (
@@ -82,7 +83,7 @@ export const ContactPage: React.FC = () => {
       <PageHero
         badge="KONTAKT & ANFAHRT"
         title="Lernen wir uns kennen."
-        description="Wir freuen uns darauf, dich persönlich im geschützten Setting unseres Studios an der Rothenbaumchaussee zu begrüßen."
+        description={STUDIO_INFO.tagline}
         imageSrc={CONTACT_HERO_IMAGE}
         imageAlt="Kontakt – body & mind Hamburg Rothenbaumchaussee"
       />
@@ -98,7 +99,7 @@ export const ContactPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { step: '01', title: 'Anfrage', desc: 'Fülle unser kurzes Kontaktformular aus oder schreibe eine E-Mail an info@nataliezimmermann.de.' },
+              { step: '01', title: 'Anfrage', desc: `Nutze das Formular und sende uns deine Anfrage per E-Mail an ${STUDIO_INFO.email} oder per WhatsApp.` },
               { step: '02', title: 'Erstgespräch', desc: 'Wir treffen uns in Ruhe im Studio Rothenbaumchaussee für eine kostenlose Beratung & Ist-Analyse.' },
               { step: '03', title: 'Durchstarten', desc: 'Start deines maßgeschneiderten Personal Trainings & Recovery-Programms.' },
             ].map((s) => (
@@ -131,6 +132,16 @@ export const ContactPage: React.FC = () => {
                   <span className="font-semibold text-white block mb-0.5">Adresse</span>
                   <span>{STUDIO_INFO.locationName}, {STUDIO_INFO.cityPostal}</span>
                   <span className="block text-[11px] text-muted mt-1">Zentrale Lage im Stadtteil Rotherbaum, gute ÖPNV- & PKW-Anbindung.</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-3.5 bg-[#0F0F0F] border border-[#222222]">
+                <Phone className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-white block mb-0.5">Telefon</span>
+                  <a href={`tel:${STUDIO_INFO.phoneTel}`} className="text-accent hover:underline">
+                    {STUDIO_INFO.phoneDisplay}
+                  </a>
                 </div>
               </div>
 
@@ -192,7 +203,7 @@ export const ContactPage: React.FC = () => {
               Erstgespräch Anfragen
             </h2>
             <p className="text-xs text-muted mt-1">
-              Fülle die Felder aus. Wir melden uns innerhalb von 24 Stunden persönlich bei dir.
+              Fülle die Felder aus und wähle E-Mail oder WhatsApp — wir melden uns persönlich bei dir.
             </p>
           </div>
 
@@ -203,11 +214,19 @@ export const ContactPage: React.FC = () => {
                 Vielen Dank, {formData.name}!
               </h3>
               <p className="text-xs text-muted">
-                Deine Anfrage ist eingegangen. Wir freuen uns auf das Gespräch mit dir.
+                {sentVia === 'whatsapp'
+                  ? 'WhatsApp sollte sich geöffnet haben — sende die Nachricht ab, damit wir sie erhalten.'
+                  : 'Dein E-Mail-Programm sollte sich geöffnet haben — sende die Nachricht ab, damit wir sie erhalten.'}
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend('email');
+              }}
+              className="space-y-4"
+            >
               <input
                 type="text"
                 name="_gotcha"
@@ -297,14 +316,23 @@ export const ContactPage: React.FC = () => {
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={loading}
-                  className="w-full min-h-[44px] bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] disabled:opacity-50"
-              >
-                <span>{loading ? 'Wird gesendet...' : 'Jetzt Erstgespräch anfragen'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button
+                  type="submit"
+                  className="flex-1 min-h-[44px] bg-accent hover:bg-accent-hover text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Per E-Mail senden</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend('whatsapp')}
+                  className="flex-1 min-h-[44px] bg-[#151515] hover:bg-[#1a1a1a] border border-[#222222] hover:border-accent/50 text-white py-3.5 rounded-none font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+                >
+                  <MessageCircle className="w-4 h-4 text-accent" />
+                  <span>Per WhatsApp</span>
+                </button>
+              </div>
             </form>
           )}
         </GlassPanel>

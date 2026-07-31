@@ -37,11 +37,9 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
             <div>
               <h2 className="text-base font-bold text-white uppercase mb-2">Kontakt</h2>
               <p>
-                E-Mail: info@nataliezimmermann.de<br />
-                Webseite: bodyandmindbynatalie.de<br />
-                <span className="text-xs text-muted font-mono mt-1 block">
-                  (Telefonischer Kontakt befindet sich derzeit in internem Prüfungsverfahren. Bitte nutze unser Kontaktformular oder E-Mail).
-                </span>
+                Telefon: {STUDIO_INFO.phoneDisplay}<br />
+                E-Mail: {STUDIO_INFO.email}<br />
+                Webseite: {STUDIO_INFO.domain}
               </p>
             </div>
 
@@ -76,14 +74,14 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
             <div>
               <h2 className="text-base font-bold text-white uppercase mb-2">2. Verantwortliche Stelle</h2>
               <p>
-                Verantwortlich im Sinne der DSGVO ist Natalie Zimmermann, Rothenbaumchaussee 156, 20149 Hamburg. E-Mail: info@nataliezimmermann.de.
+                Verantwortlich im Sinne der DSGVO ist Natalie Zimmermann, {STUDIO_INFO.locationName}, {STUDIO_INFO.cityPostal}. Telefon: {STUDIO_INFO.phoneDisplay}. E-Mail: {STUDIO_INFO.email}.
               </p>
             </div>
 
             <div>
               <h2 className="text-base font-bold text-white uppercase mb-2">3. Datenerfassung auf unserer Webseite</h2>
               <p>
-                <strong>Erstgespräch & Kontaktformular:</strong> Wenn du uns per Kontaktformular oder E-Mail Anfragen zukommen lässt, werden deine Angaben (Name, E-Mail-Adresse, Terminpräferenzen) zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert (Art. 6 Abs. 1 lit. b DSGVO).
+                <strong>Erstgespräch & Kontakt:</strong> Wenn du uns über das Formular (E-Mail oder WhatsApp), per E-Mail oder WhatsApp Anfragen zukommen lässt, verarbeiten wir deine Angaben (Name, E-Mail-Adresse, Terminpräferenzen) zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen (Art. 6 Abs. 1 lit. b DSGVO). Beim Versand per E-Mail oder WhatsApp gelten zusätzlich die Datenschutzbestimmungen deines E-Mail-Anbieters bzw. von WhatsApp/Meta.
               </p>
             </div>
 

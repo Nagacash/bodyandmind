@@ -10,8 +10,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'natalie',
     name: 'Natalie Zimmermann',
-    role: 'Gründerin · Mentalcoach · Profiboxerin',
-    bio: 'Mentalcoach, Speaker, Influencerin, Profiboxerin, Personal Trainerin und Physiotherapeutin. Spezialisiert auf manuelle Therapie und Betreuung von Elite-Athleten. Faszien-Expertin und Lu-Jong-Yoga-Instruktorin. Mentalcoach mit Schwerpunkt Wingwave. Leidenschaftliche Kampfkünstlerin seit 22 Jahren.',
+    role: 'Gründerin · Box-Weltmeisterin · Speakerin · Mental Coach',
+    bio: 'Box-Weltmeisterin, Speakerin und Mental Coach. Zudem Influencerin, Profiboxerin, Personal Trainerin und Physiotherapeutin. Spezialisiert auf manuelle Therapie und Betreuung von Elite-Athleten. Faszien-Expertin und Lu-Jong-Yoga-Instruktorin. Mentalcoach mit Schwerpunkt Wingwave. Leidenschaftliche Kampfkünstlerin seit 22 Jahren.',
     imageSrc: '/team/Natalie.webp',
   },
   {

@@ -12,11 +12,16 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const STUDIO_INFO = {
   brandName: 'body & mind by Natalie Zimmermann',
-  tagline: 'Premium Privattraining: Boxen, Kickboxen, Kraft & Recovery in Hamburg',
+  tagline:
+    'Box-Weltmeisterin, Speakerin und Mental Coach in Hamburg — körperliche Stärke und mentale Resilienz aus einer Hand.',
   locationName: 'Rothenbaumchaussee 156',
   cityPostal: '20149 Hamburg',
   district: 'Rotherbaum',
   email: 'info@nataliezimmermann.de',
+  phoneDisplay: '040 / 53790578',
+  phoneTel: '+494053790578',
+  /** Digits only (E.164 without +) — WhatsApp & wa.me */
+  whatsappPhone: '494053790578',
   domain: 'bodyandmindbynatalie.de',
   /** Natalie’s main site (Philosophie, Coaching, Presse) — studio site links here */
   nataliePersonalSiteUrl: 'https://www.bodyandmindbynatalie.de/',

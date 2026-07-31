@@ -50,7 +50,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onOpenBooking }) => {
 
           <StaggerItem>
             <h2 className="font-display text-xl sm:text-2xl text-accent font-normal italic">
-              Boxen · Kickboxen · Recovery · Erholung
+              Box-Weltmeisterin · Speakerin · Mental Coach
             </h2>
           </StaggerItem>
 
