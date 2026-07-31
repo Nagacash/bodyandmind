@@ -21,7 +21,7 @@ export const STUDIO_INFO = {
   phoneDisplay: '040 / 53790578',
   phoneTel: '+494053790578',
   /** Digits only (E.164 without +) — WhatsApp & wa.me */
-  whatsappPhone: '494053790578',
+  whatsappPhone: '4917624688929',
   domain: 'bodyandmindbynatalie.de',
   /** Natalie’s main site (Philosophie, Coaching, Presse) — studio site links here */
   nataliePersonalSiteUrl: 'https://www.bodyandmindbynatalie.de/',
