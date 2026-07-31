@@ -18,6 +18,9 @@ export const STUDIO_INFO = {
   district: 'Rotherbaum',
   email: 'info@nataliezimmermann.de',
   domain: 'bodyandmindbynatalie.de',
+  /** Natalie’s main site (Philosophie, Coaching, Presse) — studio site links here */
+  nataliePersonalSiteUrl: 'https://www.bodyandmindbynatalie.de/',
+  nataliePersonalSiteLabel: 'Natalie Zimmermann – Philosophie & Coaching',
   copyright: '© 2026 body & mind Rothenbaumchaussee 156 - 20149 Hamburg',
   pAngvTaxNote: 'Alle Preise verstehen sich inkl. gesetzlicher Mehrwertsteuer.',
   hwgRecoveryDisclaimer:

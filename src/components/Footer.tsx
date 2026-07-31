@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { STUDIO_INFO, NAV_ITEMS } from '../data/studioData';
-import { MapPin, Mail, Instagram, MessageCircle, Info } from 'lucide-react';
+import { MapPin, Mail, Instagram, MessageCircle, Info, ExternalLink } from 'lucide-react';
 import { Logo } from './Logo';
 
 interface FooterProps {
@@ -93,6 +93,18 @@ export const Footer: React.FC<FooterProps> = ({
                 <span>Erstgespräch anfragen</span>
                 <span>→</span>
               </button>
+            </div>
+
+            <div className="pt-4 border-t border-white/10">
+              <a
+                href={STUDIO_INFO.nataliePersonalSiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-muted hover:text-accent transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                <span>{STUDIO_INFO.nataliePersonalSiteLabel}</span>
+              </a>
             </div>
           </div>
 

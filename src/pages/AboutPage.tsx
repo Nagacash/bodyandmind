@@ -1,7 +1,7 @@
 import React from 'react';
-import { BRAND_VALUES } from '../data/studioData';
+import { BRAND_VALUES, STUDIO_INFO } from '../data/studioData';
 import { PillarType } from '../types';
-import { Clock, Compass, Users } from 'lucide-react';
+import { Clock, Compass, Users, ExternalLink } from 'lucide-react';
 import { PageHero } from '../components/ui/PageHero';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { PrimaryButton } from '../components/ui/PrimaryButton';
@@ -58,6 +58,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
                 – Natalie Zimmermann
               </footer>
             </blockquote>
+            <a
+              href={STUDIO_INFO.nataliePersonalSiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent hover:text-white transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Philosophie & mehr auf bodyandmindbynatalie.de</span>
+            </a>
           </div>
         </GlassPanel>
       </RevealOnScroll>
