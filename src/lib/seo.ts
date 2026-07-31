@@ -92,6 +92,15 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     keywords:
       'Premium Studio Hamburg, Privattraining Rothenbaum, Natalie Zimmermann Personal Training',
   },
+  '/team': {
+    title: 'Team – Trainer & Coaches Hamburg | body & mind',
+    description:
+      'Das Team von body & mind: Natalie Zimmermann, Jerry, Juri und Erhan — Personal Training, Boxen, Ernährung und Recovery in Hamburg Rothenbaum.',
+    answerLead:
+      'Das Team bei body & mind in Hamburg umfasst Natalie Zimmermann sowie Jerry, Juri und Erhan — qualifizierte Trainer und Coaches für Premium-Privattraining, Boxen und ganzheitliche Betreuung.',
+    keywords:
+      'Personal Trainer Team Hamburg, Natalie Zimmermann Team, Privattraining Coaches Hamburg',
+  },
   '/kontakt': {
     title:
       'Kontakt – Privattraining & Erstgespräch Hamburg | body & mind',
@@ -119,6 +128,7 @@ export const SITEMAP_PATHS = [
   '/recovery',
   '/mitgliedschaften',
   '/ueber-uns',
+  '/team',
   '/kontakt',
   '/impressum',
   '/datenschutz',

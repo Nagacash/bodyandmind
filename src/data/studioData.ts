@@ -6,6 +6,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'recovery', label: 'Recovery', path: '/recovery' },
   { id: 'pricing', label: 'Mitgliedschaften', path: '/mitgliedschaften' },
   { id: 'about', label: 'Über uns', path: '/ueber-uns' },
+  { id: 'team', label: 'Team', path: '/team' },
   { id: 'contact', label: 'Kontakt', path: '/kontakt' },
 ];
 

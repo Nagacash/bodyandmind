@@ -26,6 +26,9 @@ const PricingPage = lazy(() =>
 const AboutPage = lazy(() =>
   import('./pages/AboutPage').then((m) => ({ default: m.AboutPage }))
 );
+const TeamPage = lazy(() =>
+  import('./pages/TeamPage').then((m) => ({ default: m.TeamPage }))
+);
 const ContactPage = lazy(() =>
   import('./pages/ContactPage').then((m) => ({ default: m.ContactPage }))
 );
@@ -104,6 +107,10 @@ export default function App() {
               element={<AboutPage onOpenBooking={handleOpenBooking} />}
             />
             <Route path="/about" element={<Navigate to="/ueber-uns" replace />} />
+            <Route
+              path="/team"
+              element={<TeamPage onOpenBooking={handleOpenBooking} />}
+            />
             <Route path="/kontakt" element={<ContactPage />} />
             <Route path="/contact" element={<Navigate to="/kontakt" replace />} />
             <Route path="/impressum" element={<LegalPage type="impressum" />} />
